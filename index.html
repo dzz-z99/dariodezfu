@@ -1,7 +1,48 @@
 <!DOCTYPE html>
-<html>
-  <body>
-    <h1>Hello World</h1>
-    <p>I'm hosted with GitHub Pages.</p>
-  </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown to February 3, 2031</title>
+
+</head>
+<body>
+
+
+
+    <div class="countdown" id="countdown">
+        <!-- Countdown timer will be inserted here by JavaScript -->
+    </div>
+
+    <div>
+        <img src="/Users/dario/Dropbox/_3_2_31_website_shadow copy/IMG_1879-2 copy.jpg" alt="Centered Image">
+    </div>
+
+
+    <script>
+        function updateCountdown() {
+            const targetDate = new Date("2031-02-03T00:00:00").getTime();
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            const years = Math.floor(distance / (1000 * 60 * 60 * 24 * 365));
+            const months = Math.floor((distance % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24 * 30));
+            const days = Math.floor((distance % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown").innerHTML =
+                `${years} years, ${months} months, ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+
+            if (distance < 0) {
+                clearInterval(interval);
+                document.getElementById("countdown").innerHTML = "The date has passed";
+            }
+        }
+
+        const interval = setInterval(updateCountdown, 1000);
+        updateCountdown();  // Initial call to display countdown immediately
+    </script>
+</body>
 </html>
