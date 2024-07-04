@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>عرض 3 أرقام</title>
+  <style>
+.display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 0; /* Set font size of container to zero */
+}
+
+.digit {
+  display: inline-block;
+  margin: 0; 
+  padding: 0;
+  direction: rtl;
+  font-size: 2rem; /* Set font size of individual digits */
+}
+
+#word {
+  font-family: 'Amiri', sans-serif; 
+  font-feature-settings: "liga" 1;
+}
+
+body {
+  background-color: black;
+  color: white; /* Setting text color to white for better visibility on black background */
+}
+  </style>
+</head>
+
+<body>
+  <div class="display">
+    <span id="word">
+      <div id="digit1" class="digit">ظ</div>
+      <div id="digit2" class="digit">ظ</div>
+      <div id="digit3" class="digit">ظ</div>
+      <div id="clock"></div>
+    </span>
+  </div>
+
+  <script>  
+const tickSound = new Audio('/Users/dario/Downloads/tic-tac-81751.mp3'); // Replace 'tick.mp3' with the path to your tick sound file
+const digits = ['ظ', 'ز', 'ذ', 'ض']; // Define possible values for each digit
+let currentIndex = [0, 0, 0]; // Initialize index for current combination
+
+function updateDisplay() {
+  // Get the digit elements by their IDs
+  const digit1 = document.getElementById('digit1');
+  const digit2 = document.getElementById('digit2');
+  const digit3 = document.getElementById('digit3');
+
+  // Set the text content of each digit to the current combination
+  digit1.textContent = digits[currentIndex[0]];
+  digit2.textContent = digits[currentIndex[1]];
+  digit3.textContent = digits[currentIndex[2]];
+}
+
+function generateCombinations() {
+  const combinations = [];
+  for (let i = 0; i < digits.length; i++) {
+    for (let j = 0; j < digits.length; j++) {
+      for (let k = 0; k < digits.length; k++) {
+        combinations.push([i, j, k]);
+      }
+    }
+  }
+  return combinations;
+}
+
+const combinations = generateCombinations();
+
+function nextCombination() {
+  // Increment index and wrap around if it exceeds the number of combinations
+  currentIndex[2]++;
+  if (currentIndex[2] >= digits.length) {
+    currentIndex[2] = 0;
+    currentIndex[1]++;
+    if (currentIndex[1] >= digits.length) {
+      currentIndex[1] = 0;
+      currentIndex[0]++;
+      if (currentIndex[0] >= digits.length) {
+        currentIndex = [0, 0, 0]; // Reset back to the beginning
+      }
+    }
+  }
+  updateDisplay();
+}
+
+function updateClock() {
+  const now = new Date();
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const seconds = String(now.getSeconds()).padStart(2, '0');
+  document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+}
+
+// Call nextCombination function every second
+setInterval(() => {
+  nextCombination();
+  updateClock(); // Update the clock every second
+  tickSound.play(); // Play tick sound every second
+}, 1000);
+
+// Initial update of clock
+updateClock();
+  </script>
+
+</body>
+</html>
