@@ -1,34 +1,99 @@
-<!--
-
-a practice of radical patience, layered synchronicity hermetism
-
--->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
     <title>undefined</title>
     <style>
         body {
-   		display: block;
+            overflow: hidden; /* Prevents scrolling */
+   			 display: block;
     		font-size: 2em;
     		font-weight: bold;
 		}
-	hr {
-		color: blue;
-		background: blue;
-		height: 1px;
-		border: 0;
+		hr {
+		    color: blue;
+		    background: blue;
+		    height: 1px;
+		    border: 0;
 		}
+		.note {
+		    position: fixed;
+		    bottom: 0.5em;
+		    left: 50%;
+		    transform: translate(-50%, 0%);
+		    text-align: center;
+		    white-space: nowrap;
+		    z-index: 99;
+		}
+		sup {
+		    vertical-align: super;
+		    font-size: 0.4em;
+		    font-weight: normal;
+
+		}
+
+		im {
+			position: fixed;
+		    bottom: 0.5em;
+		    left: 0.5em;
+		    transform: translate(-50%, 0%);
+		    text-align: center;
+		    white-space: nowrap;
+		    z-index: 99;
+		    vertical-align: super;
+		}
+
+
+   .image {
+      display: block;
+      width: 180px; /* adjust the value to change the image width */
+      height: auto;
+      margin: 0 auto; /* center the image horizontally */
+      animation: rotation 100s infinite linear;
+
+    }
+
+    small {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: small;
+    font-weight: normal;
+    text-align: center;
+    padding: 10px; /* Optional: Padding around the text */
+    z-index: 1000; /* Ensure it stays above other elements */
+    width: 100%; /* Adjust width as needed */
+}
+
+
     </style>
-</head>	
+
+    
+</head>
 <body>
+
+
+
     <div class="countdown" id="countdown" style="">
         <!-- Countdown timer will be inserted here by JavaScript -->
     </div>
 
-<a href="IMG_1879.jpg"><hr></a>
+
+
+
+<a href="/Users/dario/Dropbox/_websites/_new_zz99zd/index.html" target=”_blank”><hr></a>
+
+<a href="/Users/dario/Dropbox/_websites/_new_zz99zd/index.html">
+<img src="images/ID8NsoilSgmheCV4Porw_Uu7JZ7976UXYPWv8.gif" class="image" class="rotate" alt="Image under the dot">
+</a>
+
+<small>
+<span class="initial-text">undefined </span>
+</span>
+</small>
 
     <script>
         function updateCountdown() {
@@ -51,6 +116,7 @@ a practice of radical patience, layered synchronicity hermetism
                 document.getElementById("countdown").innerHTML = "The date has passed";
             }
         }
+
         const interval = setInterval(updateCountdown, 1000);
         updateCountdown();  // Initial call to display countdown immediately
     </script>
