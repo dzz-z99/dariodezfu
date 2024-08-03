@@ -26,6 +26,10 @@
   font-feature-settings: "liga" 1;
 }
 
+#clock {
+  margin-left: 1rem; /* Add margin to separate clock from digits */
+}
+
 body {
   background-color: black;
   color: white; /* Setting text color to white for better visibility on black background */
@@ -44,7 +48,6 @@ body {
   </div>
 
   <script>  
-const tickSound = new Audio('sound/tic-tac-81751.mp3'); // Replace 'tick.mp3' with the path to your tick sound file
 const digits = ['ظ', 'ز', 'ذ', 'ض']; // Define possible values for each digit
 let currentIndex = [0, 0, 0]; // Initialize index for current combination
 
@@ -58,6 +61,9 @@ function updateDisplay() {
   digit1.textContent = digits[currentIndex[0]];
   digit2.textContent = digits[currentIndex[1]];
   digit3.textContent = digits[currentIndex[2]];
+
+  // Play the background sound
+  playBackgroundSound();
 }
 
 function generateCombinations() {
@@ -91,6 +97,35 @@ function nextCombination() {
   updateDisplay();
 }
 
+function playBackgroundSound() {
+  // Create an audio context
+  const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+  // Create an oscillator node for the main sound
+  const oscillator = audioContext.createOscillator();
+  oscillator.type = 'sawtooth'; // Set oscillator type to sawtooth wave for a more organic sound
+
+  // Set frequency and amplitude
+  oscillator.frequency.value = 200; // Set a fixed frequency
+  oscillator.detune.value = 100; // Slight detuning for a more organic sound
+
+  // Set the gain node for amplitude modulation
+  const gainNode = audioContext.createGain();
+  gainNode.gain.value = 0.5; // Set a fixed amplitude
+  oscillator.connect(gainNode);
+  gainNode.connect(audioContext.destination);
+
+  // Start the oscillator
+  oscillator.start();
+
+  // Set a very short envelope to make the sound shorter and sharper
+  const currentTime = audioContext.currentTime;
+  gainNode.gain.setValueAtTime(0, currentTime); // Start from silence
+  gainNode.gain.linearRampToValueAtTime(0.5, currentTime + 0.001); // Attack time of 1 ms
+  gainNode.gain.linearRampToValueAtTime(0, currentTime + 0.002); // Release time of 2 ms
+  oscillator.stop(currentTime + 0.002); // Total duration of 2 ms
+}
+
 function updateClock() {
   const now = new Date();
   const hours = String(now.getHours()).padStart(2, '0');
@@ -103,7 +138,6 @@ function updateClock() {
 setInterval(() => {
   nextCombination();
   updateClock(); // Update the clock every second
-  tickSound.play(); // Play tick sound every second
 }, 1000);
 
 // Initial update of clock
