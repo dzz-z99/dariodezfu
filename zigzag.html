@@ -108,6 +108,40 @@ setInterval(() => {
 
 // Initial update of clock
 updateClock();
+
+// Function to play the background sound
+function playBackgroundSound() {
+    // Create an audio context
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+    // Create an oscillator node for the main sound
+    const oscillator = audioContext.createOscillator();
+    oscillator.type = 'sawtooth'; // Set oscillator type to sawtooth wave for a more organic sound
+
+    // Set frequency and amplitude
+    oscillator.frequency.value = 200; // Set a fixed frequency
+    oscillator.detune.value = 100; // Slight detuning for a more organic sound
+
+    // Set the gain node for amplitude modulation
+    const gainNode = audioContext.createGain();
+    gainNode.gain.value = 0.5; // Set a fixed amplitude
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+
+    // Start the oscillator
+    oscillator.start();
+
+    // Set a very short envelope to make the sound shorter and sharper
+    const currentTime = audioContext.currentTime;
+    gainNode.gain.setValueAtTime(0, currentTime); // Start from silence
+    gainNode.gain.linearRampToValueAtTime(0.5, currentTime + 0.001); // Attack time of 1 ms
+    gainNode.gain.linearRampToValueAtTime(0, currentTime + 0.002); // Release time of 2 ms
+    oscillator.stop(currentTime + 0.002); // Total duration of 2 ms
+}
+
+
+
+    
   </script>
 
 </body>
