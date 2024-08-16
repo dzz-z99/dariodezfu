@@ -7,18 +7,18 @@
     <title>undefined</title>
     <style>
         body {
-   		display: block;
-		text-align: center;
+   			 display: block;
+             text-align: center;
     		font-size: 2em;
     		font-weight: bold;
 		}
-	hr {
-	        border-width: 1px;
-	        background: #8f8f8f;
-	        border-top: 1px solid #989898; /* Light grey */
-	        border-bottom: 1px solid #ebebeb; /* Dark grey */
+		hr {
+            border-width: 1px;
+            background: #8f8f8f;
+            border-top: 1px solid #989898; /* Light grey */
+            border-bottom: 1px solid #ebebeb; /* Dark grey */
 		}
-	.note {
+		.note {
 		    position: fixed;
 		    bottom: 0.5em;
 		    left: 50%;
@@ -34,10 +34,31 @@
 
 		}
 
-   
+		im {
+			position: fixed;
+		    bottom: 0.5em;
+		    left: 0.5em;
+		    transform: translate(-50%, 0%);
+		    text-align: center;
+		    white-space: nowrap;
+		    z-index: 99;
+		    vertical-align: super;
+		}
+
 
 
    .image {
+    position: fixed;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 180px;
+    z-index: 9999; /* Ensures it floats above all other content */
+
+    }
+
+
+    #fixedimage {
     position: fixed;
     top: 40px;
     left: 50%;
@@ -56,14 +77,43 @@
     font-weight: normal;
     text-align: center;
     padding: 10px; /* Optional: Padding around the text */
-    z-index: 1000; /* Ensure it stays above other elements */
+    z-index: 9999; /* Ensure it stays above other elements */
     width: 100%; /* Adjust width as needed */
 }
 
-	small:hover {
-  text-decoration: underline;
-} 	    
+        .image-link {
+            position: absolute;
+            z-index: 10; /* Ensure small images are on top */
+        }
 
+        .image-link img {
+            width: 55px;
+            height: 55px;
+        }
+
+        .large-image {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 80%;
+            max-height: 80%;
+            display: none;
+            z-index: 5; /* Place large images beneath small images */
+        }
+
+                a img {
+            display: block;
+            transition: transform 0.3s ease; /* Smooth transition */
+        }
+
+        /* Rotate image on hover */
+        a img:hover {
+            transform: rotate(10deg); /* Rotate 10 degrees */
+        }        .image-link {
+            position: absolute;
+            z-index: 10; /* Ensure small images are on top */
+        }
 
     </style>
 
@@ -72,26 +122,97 @@
 <body>
 
 
-
-    <div class="countdown" id="countdown" style="padding-bottom: 5.5px;">
+    <div class="countdown" id="countdown" style="padding-bottom: 5.5px; justify-content: center;">
         <!-- Countdown timer will be inserted here by JavaScript -->
     </div>
 
 
-
-
-<a href="IMG_1879.jpg" target=”_blank”><hr></a>
-
-<a href="https://dariodezfu.li/zzz">
-<img src="images/ID8NsoilSgmheCV4Porw_Uu7JZ7976UXYPWv8 copy.gif" class="image" class="rotate" alt="Image under the dot">
+<a href="" target=”_blank”><hr></a>
+<a href="/Users/dario/Dropbox/_websites/_new_zz99zd/index.html">
+<ximg src="/Users/dario/Downloads/ID8NsoilSgmheCV4Porw_Uu7JZ7976UXYPWv8.webp" id="fixedimage" alt="Image under the dot" style="z-index: 9999;">
 </a>
 
 <a href="https://z99zzd.net/OCCULTATION-and-HIDING.pdf"><small>
-<span>z99zzd</span>
+<span>undefined</span>
 </span></a>
 
-	
+    
 </small>
+
+
+    <div id="image-container"></div>
+    <img id="large-image-display" class="large-image" alt="Large Hover Image">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const imageContainer = document.getElementById('image-container');
+            const largeImageDisplay = document.getElementById('large-image-display');
+            const imageFolder = 'images/';
+            const largeImageFolder = 'large-images/';
+            const imageCount = 2; // Number of images
+
+            // Generate image list
+            const imageList = Array.from({ length: imageCount }, (v, i) => `${String(i + 1).padStart(2, '0')}.gif`);
+
+            // List of URLs
+            const urlList = [
+                'https://dariodezfu.li/zzz', 'https://z99zzd.net'
+            ];
+
+            function shuffle(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+            }
+
+            // Shuffle image list and URL list
+            shuffle(imageList);
+            shuffle(urlList);
+
+            function setPosition(link) {
+                const imgSize = 60;
+                const x = Math.random() * (window.innerWidth - imgSize);
+                const y = Math.random() * (window.innerHeight - imgSize);
+                link.style.left = `${x}px`;
+                link.style.top = `${y}px`;
+            }
+
+            imageList.forEach((imageName, index) => {
+                const link = document.createElement('a');
+                link.href = urlList[index];
+                link.className = 'image-link';
+
+                const img = document.createElement('img');
+                img.src = imageFolder + imageName;
+                img.alt = imageName;
+
+                link.appendChild(img);
+                imageContainer.appendChild(link);
+
+                // Set initial random position within the viewport
+                setPosition(link);
+
+                // Hover event to show large image
+                link.addEventListener('mouseover', function() {
+                    const largeImageName = imageName.replace('.gif', '.jpg'); // Assuming large images are .jpg
+                    const largeImagePath = `${largeImageFolder}${largeImageName}`;
+                    console.log("Loading image:", largeImagePath); // Log image path
+                    largeImageDisplay.src = largeImagePath;
+                    largeImageDisplay.style.display = 'block';
+                });
+
+                // Mouse out event to hide large image
+                link.addEventListener('mouseout', function() {
+                    largeImageDisplay.style.display = 'none';
+                });
+
+                // Adjust position on resize
+                window.addEventListener('resize', () => setPosition(link));
+            });
+        });
+    </script>
+
+
 
     <script>
         function updateCountdown() {
