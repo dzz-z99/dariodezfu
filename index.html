@@ -115,6 +115,42 @@
             z-index: 10; /* Ensure small images are on top */
         }
 
+              .checkerboard {
+  position: fixed; /* Ensures it stays in place on the screen */
+            top: 0;
+            left: 0;
+            width: 50vw;
+            height: 50vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            z-index: -1; /* Places the checkerboard on top of all other content */
+            pointer-events: none;
+        }
+
+        .checkerboard div {
+            width: 100%;
+            height: 100%;
+        }
+
+        .square-1, .square-4 {
+            background-color: #f1f2c8;;
+        }
+
+/* #f1f2c8; */
+
+        .square-2, .square-3 {
+            background-color: transparent;
+        }
+
+
+        /* Change background color on hover */
+        .square-1:hover, .square-4:hover {
+            background-color: white;
+        }
+
+
+	    
     </style>
 
     
@@ -126,6 +162,16 @@
         <!-- Countdown timer will be inserted here by JavaScript -->
     </div>
 
+            <div class="checkerboard">
+            <a href="file:///Users/dario/Dropbox/_websites/_background_STRETCH-image_CHECK/index.html">
+                <div class="square-1"></div>
+            </a>
+            <div class="square-2"></div>
+            <div class="square-3"></div>
+            <a href="file:///Users/dario/Dropbox/_websites/_checker_with_links/index.html">
+                <div class="square-4"></div>
+            </a>
+      </div>
 
 <a href="" target=”_blank”><hr></a>
 
