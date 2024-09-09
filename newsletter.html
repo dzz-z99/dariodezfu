@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newsletter Signup</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+        }
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        input[type="email"], input[type="checkbox"] {
+            margin-top: 10px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            width: 100%;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Subscribe to our Newsletter</h2>
+    <form id="newsletterForm">
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
+        <input type="checkbox" id="consent" name="consent" required>
+        <label for="consent">Yes, I would like to receive the newsletter</label><br><br>
+        <button type="submit">Subscribe</button>
+    </form>
+</div>
+
+<script>
+    const form = document.getElementById('newsletterForm');
+
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const email = document.getElementById('email').value;
+        const consent = document.getElementById('consent').checked;
+
+        if (consent) {
+            const response = await fetch('https://script.google.com/macros/s/AKfycbwjJ0G-cnNGoJJcW3a0oROO6LAiPhaEfEd4jV2tKbEd1N0BnSAJ56NTKCj5ohtGvij4Sw/exec', {
+                method: 'POST',
+                body: JSON.stringify({ email }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                alert('Thank you for subscribing!');
+                form.reset();
+            } else {
+                alert('There was a problem with your subscription. Please try again.');
+            }
+        } else {
+            alert('Please accept the terms to receive the newsletter.');
+        }
+    });
+</script>
+
+</body>
+</html>
