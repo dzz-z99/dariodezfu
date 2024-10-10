@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -118,7 +119,7 @@ a {
 
             function changeImage() {
                 currentImage = (currentImage % imageCount) + 1;
-                overlay.src = reel/${String(currentImage).padStart(2, '0')}.png;
+                overlay.src = `reel/${String(currentImage).padStart(2, '0')}.png`;
             }
 
             setInterval(changeImage, 1000); // Change image every 4 seconds
@@ -132,7 +133,7 @@ a {
             const imageCount = 2; // Number of images
 
             // Generate image list
-            const imageList = Array.from({ length: imageCount }, (v, i) => ${String(i + 1).padStart(2, '0')}.gif);
+            const imageList = Array.from({ length: imageCount }, (v, i) => `${String(i + 1).padStart(2, '0')}.gif`);
 
             // List of URLs
             const urlList = [
@@ -154,8 +155,8 @@ a {
                 const imgSize = 60;
                 const x = Math.random() * (window.innerWidth - imgSize);
                 const y = Math.random() * (window.innerHeight - imgSize);
-                link.style.left = ${x}px;
-                link.style.top = ${y}px;
+                link.style.left = `${x}px`;
+                link.style.top = `${y}px`;
             }
 
             imageList.forEach((imageName, index) => {
@@ -176,7 +177,7 @@ a {
                 // Hover event to show large image
                 link.addEventListener('mouseover', function() {
                     const largeImageName = imageName.replace('.gif', '.jpg'); // Assuming large images are .jpg
-                    const largeImagePath = ${largeImageFolder}${largeImageName};
+                    const largeImagePath = `${largeImageFolder}${largeImageName}`;
                     console.log("Loading image:", largeImagePath); // Log image path
                     largeImageDisplay.src = largeImagePath;
                     largeImageDisplay.style.display = 'block';
@@ -205,7 +206,7 @@ a {
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
             document.getElementById("countdown").innerHTML =
-                ${years} years, ${months} months, ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds;
+                `${years} years, ${months} months, ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
 
             if (distance < 0) {
                 clearInterval(interval);
