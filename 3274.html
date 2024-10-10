@@ -2,20 +2,45 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="robots" content="noindex, nofollow">
     <title>undefined</title>
     <style>
-        body {
+        * {
             margin: 0;
-            height: 100vh;
-            position: relative;
+            padding: 0;
+            box-sizing: border-box; /* Ensure padding/border doesn't affect layout */
+        }
+
+        html, body {
+            height: 100%;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+
+        body {
             font-size: 2em;
             font-weight: bold;
             color: #fff;
             display: flex;
             justify-content: center;
             align-items: center;
+            background-color: black;
+            margin: 0;
+            height: 100vh;
+            position: relative;
+        }
+
+        #left-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            width: 90%; /* Adjust width to better fit smaller screens */
+            max-width: 600px; /* Prevent content from being too wide */
         }
 
         #video-background {
@@ -28,51 +53,27 @@
             z-index: 1;
         }
 
-        #left-content {
-            width: 80%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            position: relative;
-            z-index: 2;
-            background-color: rgba(0, 0, 0, 0.5);
-        }
-
-        #multiply-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 3;
-            pointer-events: none;
-            mix-blend-mode: multiply;
-            object-fit: fill;
-        }
-
         #countdown {
             z-index: 4;
             padding: 20px;
         }
 
-            small {
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 16px;
-    font-weight: normal;
-    text-align: center;
-    padding: 10px; /* Optional: Padding around the text */
-    z-index: 9999; /* Ensure it stays above other elements */
-    width: 100%; /* Adjust width as needed */
-}
+        small {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 16px;
+            font-weight: normal;
+            text-align: center;
+            padding: 10px; /* Optional: Padding around the text */
+            z-index: 9999; /* Ensure it stays above other elements */
+            width: 100%; /* Adjust width as needed */
+        }
 
-a {
-  text-decoration: none;
-}
-
+        a {
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -83,32 +84,23 @@ a {
         </div>
     </div>
 
-   <!-- <img id="multiply-overlay" src="reel/01.png" alt="Overlay"> -->
-
-
-<small>
+    <small>
         <a href="https://z99zzd.net/OCCULTATION-and-HIDING.pdf">
-        <span>undefined 0</span>
+            <span>undefined 0</span>
         </a> <br>
-
-            <a href="https://z99zzd.net/files/Barthes-The_Death_of_the_Author.pdf">
-        <span>undefined 1</span>
+        <a href="https://z99zzd.net/files/Barthes-The_Death_of_the_Author.pdf">
+            <span>undefined 1</span>
         </a> <br>
-
-            <a href="https://z99zzd.net/files/15_eng_articulos_serra.pdf">
-        <span>undefined 2</span>
+        <a href="https://z99zzd.net/files/15_eng_articulos_serra.pdf">
+            <span>undefined 2</span>
         </a> <br>
-
-                <a href="https://z99zzd.net/files/peruffojewelry.com-%20IN%20CONVERSATION%20WITH%20FRANZISKA%20AIGNER.pdf">
-        <span>undefined 3</span>
+        <a href="https://z99zzd.net/files/peruffojewelry.com-%20IN%20CONVERSATION%20WITH%20FRANZISKA%20AIGNER.pdf">
+            <span>undefined 3</span>
         </a> <br>
-
-                    <a href="https://z99zzd.net/files/68140_e-flux-journal-art-as-occupation-claims-for-an-autonomy-of-life.pdf">
-        <span>undefined 4</span>
+        <a href="https://z99zzd.net/files/68140_e-flux-journal-art-as-occupation-claims-for-an-autonomy-of-life.pdf">
+            <span>undefined 4</span>
         </a> <br>
-
-    
-</small>
+    </small>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -121,75 +113,7 @@ a {
                 overlay.src = `reel/${String(currentImage).padStart(2, '0')}.png`;
             }
 
-            setInterval(changeImage, 1000); // Change image every 4 seconds
-        });
-
-                document.addEventListener('DOMContentLoaded', function() {
-            const imageContainer = document.getElementById('image-container');
-            const largeImageDisplay = document.getElementById('large-image-display');
-            const imageFolder = 'images/';
-            const largeImageFolder = 'large-images/';
-            const imageCount = 2; // Number of images
-
-            // Generate image list
-            const imageList = Array.from({ length: imageCount }, (v, i) => `${String(i + 1).padStart(2, '0')}.gif`);
-
-            // List of URLs
-            const urlList = [
-                'https://dariodezfu.li/clock', 'https://z99zzd.net'
-            ];
-
-            function shuffle(array) {
-                for (let i = array.length - 1; i > 0; i--) {
-                    const j = Math.floor(Math.random() * (i + 1));
-                    [array[i], array[j]] = [array[j], array[i]];
-                }
-            }
-
-            // Shuffle image list and URL list
-            shuffle(imageList);
-            shuffle(urlList);
-
-            function setPosition(link) {
-                const imgSize = 60;
-                const x = Math.random() * (window.innerWidth - imgSize);
-                const y = Math.random() * (window.innerHeight - imgSize);
-                link.style.left = `${x}px`;
-                link.style.top = `${y}px`;
-            }
-
-            imageList.forEach((imageName, index) => {
-                const link = document.createElement('a');
-                link.href = urlList[index];
-                link.className = 'image-link';
-
-                const img = document.createElement('img');
-                img.src = imageFolder + imageName;
-                img.alt = imageName;
-
-                link.appendChild(img);
-                imageContainer.appendChild(link);
-
-                // Set initial random position within the viewport
-                setPosition(link);
-
-                // Hover event to show large image
-                link.addEventListener('mouseover', function() {
-                    const largeImageName = imageName.replace('.gif', '.jpg'); // Assuming large images are .jpg
-                    const largeImagePath = `${largeImageFolder}${largeImageName}`;
-                    console.log("Loading image:", largeImagePath); // Log image path
-                    largeImageDisplay.src = largeImagePath;
-                    largeImageDisplay.style.display = 'block';
-                });
-
-                // Mouse out event to hide large image
-                link.addEventListener('mouseout', function() {
-                    largeImageDisplay.style.display = 'none';
-                });
-
-                // Adjust position on resize
-                window.addEventListener('resize', () => setPosition(link));
-            });
+            setInterval(changeImage, 1000);
         });
 
         function updateCountdown() {
