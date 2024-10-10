@@ -6,16 +6,21 @@
     <meta name="robots" content="noindex, nofollow">
     <title>undefined</title>
     <style>
-        body {
+        html, body {
             margin: 0;
+            padding: 0;
             height: 100vh;
-            position: relative;
-            font-size: 2em;
-            font-weight: bold;
-            color: #fff;
+            overflow: hidden;
+        }
+
+        body {
             display: flex;
             justify-content: center;
             align-items: center;
+            font-size: 2em;
+            font-weight: bold;
+            color: #fff;
+            background-color: #000;
         }
 
         #video-background {
@@ -64,38 +69,15 @@
             font-size: 16px;
             font-weight: normal;
             text-align: center;
-            padding: 10px;
-            z-index: 9999;
-            width: 100%;
+            padding: 10px; /* Optional: Padding around the text */
+            z-index: 9999; /* Ensure it stays above other elements */
+            width: 100%; /* Adjust width as needed */
         }
 
         a {
             text-decoration: none;
         }
 
-        /* Add media query to handle mobile devices */
-        @media (max-width: 768px) {
-            body {
-                overflow-x: hidden; /* Prevent horizontal scroll */
-            }
-
-            #left-content {
-                width: 100%; /* Ensure it takes full width on smaller screens */
-            }
-
-            #video-background {
-                width: 100%; /* Make the video background responsive */
-                object-fit: cover;
-            }
-
-            small {
-                font-size: 12px; /* Adjust the text size for mobile */
-            }
-
-            a {
-                font-size: 14px; /* Ensure links are not too large */
-            }
-        }
     </style>
 </head>
 <body>
@@ -108,29 +90,27 @@
 
    <!-- <img id="multiply-overlay" src="reel/01.png" alt="Overlay"> -->
 
-
-<small>
+    <small>
         <a href="https://z99zzd.net/OCCULTATION-and-HIDING.pdf">
-        <span>undefined 0</span>
+            <span>undefined 0</span>
         </a> <br>
 
-            <a href="https://z99zzd.net/files/Barthes-The_Death_of_the_Author.pdf">
-        <span>undefined 1</span>
+        <a href="https://z99zzd.net/files/Barthes-The_Death_of_the_Author.pdf">
+            <span>undefined 1</span>
         </a> <br>
 
-            <a href="https://z99zzd.net/files/15_eng_articulos_serra.pdf">
-        <span>undefined 2</span>
+        <a href="https://z99zzd.net/files/15_eng_articulos_serra.pdf">
+            <span>undefined 2</span>
         </a> <br>
 
-                <a href="https://z99zzd.net/files/peruffojewelry.com-%20IN%20CONVERSATION%20WITH%20FRANZISKA%20AIGNER.pdf">
-        <span>undefined 3</span>
+        <a href="https://z99zzd.net/files/peruffojewelry.com-%20IN%20CONVERSATION%20WITH%20FRANZISKA%20AIGNER.pdf">
+            <span>undefined 3</span>
         </a> <br>
 
-                    <a href="https://z99zzd.net/files/68140_e-flux-journal-art-as-occupation-claims-for-an-autonomy-of-life.pdf">
-        <span>undefined 4</span>
+        <a href="https://z99zzd.net/files/68140_e-flux-journal-art-as-occupation-claims-for-an-autonomy-of-life.pdf">
+            <span>undefined 4</span>
         </a> <br>
-
-</small>
+    </small>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
