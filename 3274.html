@@ -6,21 +6,16 @@
     <meta name="robots" content="noindex, nofollow">
     <title>undefined</title>
     <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            overflow: hidden;
-        }
-
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            margin: 0;
+            height: 100vh;
+            position: relative;
             font-size: 2em;
             font-weight: bold;
             color: #fff;
-            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         #video-background {
@@ -61,22 +56,22 @@
             padding: 20px;
         }
 
-        small {
-            position: fixed;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 16px;
-            font-weight: normal;
-            text-align: center;
-            padding: 10px; /* Optional: Padding around the text */
-            z-index: 9999; /* Ensure it stays above other elements */
-            width: 100%; /* Adjust width as needed */
-        }
+            small {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 16px;
+    font-weight: normal;
+    text-align: center;
+    padding: 10px; /* Optional: Padding around the text */
+    z-index: 9999; /* Ensure it stays above other elements */
+    width: 100%; /* Adjust width as needed */
+}
 
-        a {
-            text-decoration: none;
-        }
+a {
+  text-decoration: none;
+}
 
     </style>
 </head>
@@ -90,27 +85,30 @@
 
    <!-- <img id="multiply-overlay" src="reel/01.png" alt="Overlay"> -->
 
-    <small>
+
+<small>
         <a href="https://z99zzd.net/OCCULTATION-and-HIDING.pdf">
-            <span>undefined 0</span>
+        <span>undefined 0</span>
         </a> <br>
 
-        <a href="https://z99zzd.net/files/Barthes-The_Death_of_the_Author.pdf">
-            <span>undefined 1</span>
+            <a href="https://z99zzd.net/files/Barthes-The_Death_of_the_Author.pdf">
+        <span>undefined 1</span>
         </a> <br>
 
-        <a href="https://z99zzd.net/files/15_eng_articulos_serra.pdf">
-            <span>undefined 2</span>
+            <a href="https://z99zzd.net/files/15_eng_articulos_serra.pdf">
+        <span>undefined 2</span>
         </a> <br>
 
-        <a href="https://z99zzd.net/files/peruffojewelry.com-%20IN%20CONVERSATION%20WITH%20FRANZISKA%20AIGNER.pdf">
-            <span>undefined 3</span>
+                <a href="https://z99zzd.net/files/peruffojewelry.com-%20IN%20CONVERSATION%20WITH%20FRANZISKA%20AIGNER.pdf">
+        <span>undefined 3</span>
         </a> <br>
 
-        <a href="https://z99zzd.net/files/68140_e-flux-journal-art-as-occupation-claims-for-an-autonomy-of-life.pdf">
-            <span>undefined 4</span>
+                    <a href="https://z99zzd.net/files/68140_e-flux-journal-art-as-occupation-claims-for-an-autonomy-of-life.pdf">
+        <span>undefined 4</span>
         </a> <br>
-    </small>
+
+    
+</small>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -120,13 +118,13 @@
 
             function changeImage() {
                 currentImage = (currentImage % imageCount) + 1;
-                overlay.src = `reel/${String(currentImage).padStart(2, '0')}.png`;
+                overlay.src = reel/${String(currentImage).padStart(2, '0')}.png;
             }
 
             setInterval(changeImage, 1000); // Change image every 4 seconds
         });
 
-        document.addEventListener('DOMContentLoaded', function() {
+                document.addEventListener('DOMContentLoaded', function() {
             const imageContainer = document.getElementById('image-container');
             const largeImageDisplay = document.getElementById('large-image-display');
             const imageFolder = 'images/';
@@ -134,7 +132,7 @@
             const imageCount = 2; // Number of images
 
             // Generate image list
-            const imageList = Array.from({ length: imageCount }, (v, i) => `${String(i + 1).padStart(2, '0')}.gif`);
+            const imageList = Array.from({ length: imageCount }, (v, i) => ${String(i + 1).padStart(2, '0')}.gif);
 
             // List of URLs
             const urlList = [
@@ -156,8 +154,8 @@
                 const imgSize = 60;
                 const x = Math.random() * (window.innerWidth - imgSize);
                 const y = Math.random() * (window.innerHeight - imgSize);
-                link.style.left = `${x}px`;
-                link.style.top = `${y}px`;
+                link.style.left = ${x}px;
+                link.style.top = ${y}px;
             }
 
             imageList.forEach((imageName, index) => {
@@ -178,7 +176,7 @@
                 // Hover event to show large image
                 link.addEventListener('mouseover', function() {
                     const largeImageName = imageName.replace('.gif', '.jpg'); // Assuming large images are .jpg
-                    const largeImagePath = `${largeImageFolder}${largeImageName}`;
+                    const largeImagePath = ${largeImageFolder}${largeImageName};
                     console.log("Loading image:", largeImagePath); // Log image path
                     largeImageDisplay.src = largeImagePath;
                     largeImageDisplay.style.display = 'block';
@@ -207,7 +205,7 @@
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
             document.getElementById("countdown").innerHTML =
-                `${years} years, ${months} months, ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+                ${years} years, ${months} months, ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds;
 
             if (distance < 0) {
                 clearInterval(interval);
