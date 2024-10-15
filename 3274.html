@@ -88,45 +88,58 @@ a {
   text-decoration: none;
 }
 
-        .subscription-box {
-            width: 300px;
-            margin: 10px auto;
-            padding: 0px;
-            text-align: center;
-            border: 1px solid white;
-            border-radius: 00px;
-        }
+.subscription-box {
+    width: 300px;
+    padding: 10px;
+    text-align: center;
+    border: 0.5px solid black;
+    border-radius: 0px;
+    background-color: rgba(0, 0, 0, 0); /* Makes it semi-transparent */
+    position: fixed;  /* Ensures it floats */
+    bottom: 10px;     /* Position it 10px from the bottom */
+    right: 10px;      /* Position it 10px from the right */
+    z-index: 1000;    /* Ensures it stays on top of other elements */
+    color: black;     /* Text color for better readability */
+    font-family: "Times New Roman", Times, serif;
+}
 
-        .subscription-box input[type="email"] {
-            width: 100%;
-            padding: 5px;
-            margin-bottom: 5px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
+.subscription-box input[type="email"] {
+    width: 90%;
+    padding: 5px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
 
-        .subscription-box button {
-            padding: 5px 10px;
-            border: none;
-            background-color: lightgrey;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+.subscription-box button {
+    padding: 5px 10px;
+    border: none;
+    background-color: lightgrey;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
-        .subscription-box button:hover {
-            background-color: grey;
-        }
+.subscription-box button:hover {
+    background-color: grey;
+}
 
-        .success-message {
-            color: green;
-            margin-top: 5px;
-        }
+.success-message {
+    color: green;
+    margin-top: 5px;
+}
 
-        .error-message {
-            color: red;
-            margin-top: 5px;
-        }
+.error-message {
+    color: red;
+    margin-top: 5px;
+}
+.asterisk {
+    color: #e85c41;
+    font-size: 150%;
+    font-weight: normal;
+    position: relative;
+    top: 5px;
+}
 
 
 
@@ -166,11 +179,11 @@ a {
     
 </small>
 
-        <div class="subscription-box">
-        <h3>Subscribe to our Newsletter</h3>
+    <div class="subscription-box">
+        Email Address  <span class="asterisk">*</span>
         <form id="subscription-form">
-            <input type="email" id="email" placeholder="Email address" required>
-            <button type="submit">Subscribe</button>
+            <input type="email" id="email" placeholder="" required>
+            <button type="submit">Subscribe to z99zzd Newsletter</button>
         </form>
         <p id="message" class="success-message" style="display: none;">Thank you for subscribing!</p>
         <p id="error-message" class="error-message" style="display: none;">Something went wrong. Please try again.</p>
