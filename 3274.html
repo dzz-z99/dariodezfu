@@ -89,15 +89,15 @@ a {
 }
 
 .subscription-box {
-    width: 300px;
+    width: 100%;
     padding: 10px;
     text-align: center;
-    border: 0.5px solid black;
+    border: 0.5px solid greenyellow;
     border-radius: 0px;
     background-color: rgba(0, 0, 0, 0); /* Makes it semi-transparent */
     position: fixed;  /* Ensures it floats */
-    bottom: 10px;     /* Position it 10px from the bottom */
-    right: 10px;      /* Position it 10px from the right */
+    top: 25px;     /* Position it 10px from the bottom */
+    right: 0px;      /* Position it 10px from the right */
     z-index: 1000;    /* Ensures it stays on top of other elements */
     color: black;     /* Text color for better readability */
     font-family: "Times New Roman", Times, serif;
@@ -105,8 +105,8 @@ a {
 
 .subscription-box input[type="email"] {
     width: 90%;
-    padding: 5px;
-    margin-bottom: 5px;
+    padding: 10px;
+    margin-bottom: 1px;
     border-radius: 5px;
     border: 1px solid #ccc;
 }
@@ -116,6 +116,7 @@ a {
     border: none;
     background-color: lightgrey;
     color: white;
+        font-size: 105%;
     border-radius: 5px;
     cursor: pointer;
 }
@@ -139,6 +140,24 @@ a {
     font-weight: normal;
     position: relative;
     top: 5px;
+}
+
+
+/* Media Query for Mobile */
+@media only screen and (max-width: 768px) {
+    .subscription-box {
+        font-size: 16px;
+    }
+
+    .subscription-box input[type="email"] {
+        width: 80%; /* Make input field take up more space on small screens */
+        margin-bottom: 10px;
+    }
+
+    .subscription-box button {
+        width: 80%; /* Make button also take up more space */
+        font-size: 16px;
+    }
 }
 
 
