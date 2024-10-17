@@ -57,8 +57,12 @@
     background-size: 100% 100%; /* Force the image to stretch and fill the div */
     background-position: center; /* Center the image */
     background-repeat: no-repeat; /* Prevent the image from repeating */
+        filter: grayscale(100%); /* Apply grayscale (black and white) */
 }
 
+        #left-content:hover {
+    filter: grayscale(0%); /* Remove grayscale on hover */
+}
 
         #multiply-overlay {
             position: absolute;
