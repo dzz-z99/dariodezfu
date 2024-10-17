@@ -1,0 +1,366 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>undefined</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            position: relative;
+            font-size: 2em;
+            font-weight: bold;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+                @media only screen and (max-width: 768px) {
+           html, body {
+                height: 100%;
+                margin: 0;
+            }          
+            body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+
+        }
+
+        #video-background {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 34%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        #left-content {
+            width: 80%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+
+        #multiply-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
+            pointer-events: none;
+            mix-blend-mode: multiply;
+            object-fit: fill;
+        }
+
+        #countdown {
+            z-index: 4;
+            padding: 20px;
+        }
+
+            small {
+    position: fixed;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 16px;
+    font-weight: normal;
+    text-align: center;
+    padding: 10px; /* Optional: Padding around the text */
+    z-index: 9999; /* Ensure it stays above other elements */
+    width: 100%; /* Adjust width as needed */
+}
+
+a {
+  text-decoration: none;
+}
+
+.subscription-box {
+    width: 100%;
+    padding: 0px;
+    text-align: center;
+    border: 0.5px solid transparent;
+    border-radius: 0px;
+    background-color: rgba(0, 0, 0, 0); /* Makes it semi-transparent */
+    position: fixed;  /* Ensures it floats */
+    top: 5px;     /* Position it 10px from the bottom */
+    margin-right: 5px;      /* Position it 10px from the right */
+    margin-left: 5px;      /* Position it 10px from the right */
+    z-index: 1000;    /* Ensures it stays on top of other elements */
+    color: black;     /* Text color for better readability */
+    font-family: "Times New Roman", Times, serif;
+    font-size: 10px;
+    font-weight: normal;
+
+}
+
+.subscription-box input[type="email"] {
+    width: 20%;
+    padding: 5px 10px;
+    margin-bottom: 1px;
+    border-radius: 0px;
+    font-size: 10px;
+    border: 1px solid #ccc;
+    font-family: "Times New Roman", Times, serif;
+}
+
+.subscription-box button {
+    padding: 0px;
+        width: 20%;
+    border: none;
+    background-color: #b3d3fb;
+    color: #551A8B;
+    border-radius: 0px;
+    font-size: 10px;
+    cursor: pointer;
+    font-family: times;
+}
+
+.subscription-box button:hover {
+    background-color: #fef2ff;
+}
+
+.success-message {
+    color: green;
+    margin-top: 5px;
+        font-size: 20px;
+
+}
+
+.error-message {
+    color: red;
+    margin-top: 5px;
+}
+
+
+
+/* Media Query for Mobile */
+@media only screen and (max-width: 768px) {
+    .subscription-box {
+        font-size: 16px;
+    }
+
+    .subscription-box input[type="email"] {
+        width: 80%; /* Make input field take up more space on small screens */
+    }
+
+    .subscription-box button {
+        width: 20%; /* Make button also take up more space */
+        font-size: 16px;
+    }
+}
+
+.highlighted-text {
+            background-color: #b3d3fb; /* or any color you prefer */
+        }
+
+        
+    </style>
+</head>
+<body>
+
+    <div id="left-content">
+        <div id="countdown">
+            <!-- Countdown timer will be inserted here by JavaScript -->
+        </div>
+    </div>
+
+   <!-- <img id="multiply-overlay" src="reel/01.png" alt="Overlay"> -->
+
+
+<small>
+        <a href="https://z99zzd.net/OCCULTATION-and-HIDING.pdf" onmouseover="this.style.textDecoration='underline'" 
+   onmouseout="this.style.textDecoration='none'">
+        <span class="highlighted-text">3&thinsp;</span>
+        </a> <br>
+
+            <a href="https://z99zzd.net/files/Barthes-The_Death_of_the_Author.pdf" onmouseover="this.style.textDecoration='underline'" 
+   onmouseout="this.style.textDecoration='none'">
+        <span class="highlighted-text">2&thinsp;</span>
+        </a> <br>
+
+            <a href="https://z99zzd.net/files/15_eng_articulos_serra.pdf" onmouseover="this.style.textDecoration='underline'" 
+   onmouseout="this.style.textDecoration='none'">
+        <span class="highlighted-text">7&thinsp;</span>
+        </a> <br>
+
+                <a href="https://z99zzd.net/files/peruffojewelry.com-%20IN%20CONVERSATION%20WITH%20FRANZISKA%20AIGNER.pdf" onmouseover="this.style.textDecoration='underline'" 
+   onmouseout="this.style.textDecoration='none'">
+        <span class="highlighted-text">4&thinsp;</span>
+        </a> <br>
+
+    
+</small>
+
+    <div class="subscription-box">
+        <form id="subscription-form">
+            <input type="email" id="email" placeholder="Email Address" required>
+            <button type="submit">Subscribe</button>
+        </form>
+        <p id="message" class="success-message" style="display: none;">Thank you for subscribing!</p>
+        <p id="error-message" class="error-message" style="display: none;">Something went wrong. Please try again.</p>
+    </div>
+
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const overlay = document.getElementById('multiply-overlay');
+            const imageCount = 6;
+            let currentImage = 1;
+
+            function changeImage() {
+                currentImage = (currentImage % imageCount) + 1;
+                overlay.src = `reel/${String(currentImage).padStart(2, '0')}.png`;
+            }
+
+            setInterval(changeImage, 1000); // Change image every 4 seconds
+        });
+
+                document.addEventListener('DOMContentLoaded', function() {
+            const imageContainer = document.getElementById('image-container');
+            const largeImageDisplay = document.getElementById('large-image-display');
+            const imageFolder = 'images/';
+            const largeImageFolder = 'large-images/';
+            const imageCount = 2; // Number of images
+
+            // Generate image list
+            const imageList = Array.from({ length: imageCount }, (v, i) => `${String(i + 1).padStart(2, '0')}.gif`);
+
+            // List of URLs
+            const urlList = [
+                'https://dariodezfu.li/clock', 'https://z99zzd.net'
+            ];
+
+            function shuffle(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+            }
+
+            // Shuffle image list and URL list
+            shuffle(imageList);
+            shuffle(urlList);
+
+            function setPosition(link) {
+                const imgSize = 60;
+                const x = Math.random() * (window.innerWidth - imgSize);
+                const y = Math.random() * (window.innerHeight - imgSize);
+                link.style.left = `${x}px`;
+                link.style.top = `${y}px`;
+            }
+
+            imageList.forEach((imageName, index) => {
+                const link = document.createElement('a');
+                link.href = urlList[index];
+                link.className = 'image-link';
+
+                const img = document.createElement('img');
+                img.src = imageFolder + imageName;
+                img.alt = imageName;
+
+                link.appendChild(img);
+                imageContainer.appendChild(link);
+
+                // Set initial random position within the viewport
+                setPosition(link);
+
+                // Hover event to show large image
+                link.addEventListener('mouseover', function() {
+                    const largeImageName = imageName.replace('.gif', '.jpg'); // Assuming large images are .jpg
+                    const largeImagePath = `${largeImageFolder}${largeImageName}`;
+                    console.log("Loading image:", largeImagePath); // Log image path
+                    largeImageDisplay.src = largeImagePath;
+                    largeImageDisplay.style.display = 'block';
+                });
+
+                // Mouse out event to hide large image
+                link.addEventListener('mouseout', function() {
+                    largeImageDisplay.style.display = 'none';
+                });
+
+                // Adjust position on resize
+                window.addEventListener('resize', () => setPosition(link));
+            });
+        });
+
+        function updateCountdown() {
+            const targetDate = new Date("2031-02-03T00:00:00").getTime();
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            const years = Math.floor(distance / (1000 * 60 * 60 * 24 * 365));
+            const months = Math.floor((distance % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24 * 30));
+            const days = Math.floor((distance % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown").innerHTML =
+                `${years} years, ${months} months, ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+
+            if (distance < 0) {
+                clearInterval(interval);
+                document.getElementById("countdown").innerHTML = "The date has passed";
+            }
+        }
+
+        const interval = setInterval(updateCountdown, 1000);
+        updateCountdown();  // Initial call to display countdown immediately
+    </script>
+
+<script>
+        const form = document.getElementById('subscription-form');
+        const message = document.getElementById('message');
+        const errorMessage = document.getElementById('error-message');
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value;
+
+            // Replace this URL with the Web App URL from the Google Apps Script deployment
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbweI72vvZj8aERIOVHX4ObCD5SSD4Gbc7G6v593A4Nj4oK5ZCcUqF_fiSjncLlrCz8QWA/exec';
+
+            fetch(scriptURL, {
+                method: 'POST',
+                body: new URLSearchParams({'email': email}),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === "success") {
+                    message.style.display = 'block';
+                    errorMessage.style.display = 'none';
+                    form.reset();
+                } else {
+                    message.style.display = 'none';
+                    errorMessage.style.display = 'block';
+                }
+            })
+            .catch(error => {
+                console.error('Error!', error);
+                message.style.display = 'none';
+                errorMessage.style.display = 'block';
+            });
+        });
+    </script>
+    
+</body>
+</html>
