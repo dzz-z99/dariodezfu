@@ -1,51 +1,58 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Responsive Split Window with Iframes</title>
     <style>
-body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
-}
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+        }
 
-.container {
-    display: flex;
-    flex-direction: column; /* Stack iframes vertically on mobile */
-    height: 100vh; /* Full viewport height */
-    width: 100vw; /* Full viewport width */
-    position: relative;
-    overflow: hidden; /* Prevent overflow */
-}
+        .container {
+            display: flex;
+            height: 100vh; /* Full viewport height */
+            width: 100vw;  /* Full viewport width */
+            position: relative; /* For absolute positioning of overlay */
+        }
 
-.iframe-left, .iframe-right {
-    border: none;
-    height: calc(50vh); /* Each iframe takes up exactly 50% of the viewport height */
-    width: 100vw; /* Full width */
-}
+        .iframe-left, .iframe-right {
+            flex: 1; /* Each takes up half the width */
+            border: none; /* Remove iframe borders */
+            height: 100%; /* Full height */
+            width: 100%; /* Full width */
+        }
 
-/* Overlay to detect clicks on the right iframe */
-.overlay {
-    position: absolute;
-    bottom: 0;
-    height: 50vh; /* Cover the bottom 50% */
-    width: 100vw;
-    cursor: pointer;
-    z-index: 10;
-    background: transparent;
-}
+        .overlay {
+            position: absolute;
+            right: 0; /* Place over the right iframe */
+            top: 0;
+            height: 100%;
+            width: 50%;
+            cursor: pointer; /* Change cursor to indicate clickable */
+            z-index: 10; /* Higher than iframes to detect clicks */
+            background: transparent; /* Invisible */
+        }
 
-/* Media Query for Small Screens */
-@media (max-width: 768px) {
-    .iframe-left, .iframe-right, .overlay {
-        height: calc(50vh - 1px); /* Adjust height to avoid overflow */
-        width: 100vw;
-    }
-}
+        /* Media Query for Small Screens */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column; /* Change to vertical stacking */
+            }
 
+            .iframe-left, .iframe-right, .overlay {
+                height: 50vh; /* Each iframe and overlay takes half the viewport height */
+                width: 100%; /* Full width */
+            }
+
+            .overlay {
+                bottom: 0; /* Place over the bottom iframe */
+            }
+        }
     </style>
 </head>
 <body>
