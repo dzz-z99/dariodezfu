@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Responsive Split Window with Iframes</title>
     <style>
         body, html {
@@ -37,21 +37,25 @@
             background: transparent; /* Invisible */
         }
 
-        /* Media Query for Small Screens */
-        @media (max-width: 768px) {
-            .container {
-                flex-direction: column; /* Change to vertical stacking */
-            }
+/* Media Query for Small Screens */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        height: 100vh; /* Full viewport height for mobile */
+        width: 100vw;
+    }
 
-            .iframe-left, .iframe-right, .overlay {
-                height: 50vh; /* Each iframe and overlay takes half the viewport height */
-                width: 100%; /* Full width */
-            }
+    .iframe-left, .iframe-right, .overlay {
+        height: 50vh; /* Half viewport height */
+        width: 100vw;
+    }
 
-            .overlay {
-                bottom: 0; /* Place over the bottom iframe */
-            }
-        }
+    .overlay {
+        bottom: 0;
+        height: 50vh;
+        width: 100vw;
+    }
+}
     </style>
 </head>
 <body>
