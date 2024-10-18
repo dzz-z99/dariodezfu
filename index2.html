@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Split Window with Iframes</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh; /* Full viewport height */
+            width: 100vw;  /* Full viewport width */
+            position: relative; /* For absolute positioning of overlay */
+        }
+
+        .iframe-left, .iframe-right {
+            flex: 1; /* Each takes up half the width */
+            border: none; /* Remove iframe borders */
+            height: 100%; /* Full height */
+            width: 100%; /* Full width */
+        }
+
+        .overlay {
+            position: absolute;
+            right: 0; /* Place over the right iframe */
+            top: 0;
+            height: 100%;
+            width: 50%;
+            cursor: pointer; /* Change cursor to indicate clickable */
+            z-index: 10; /* Higher than iframes to detect clicks */
+            background: transparent; /* Invisible */
+        }
+
+        /* Media Query for Small Screens */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column; /* Change to vertical stacking */
+            }
+
+            .iframe-left, .iframe-right, .overlay {
+                height: 50vh; /* Each iframe and overlay takes half the viewport height */
+                width: 100%; /* Full width */
+            }
+
+            .overlay {
+                bottom: 0; /* Place over the bottom iframe */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Left iframe -->
+        <iframe class="iframe-left" src="https://dariodezfu.li/clock" title="Clock"></iframe>
+
+        <!-- Right iframe -->
+        <iframe class="iframe-right" src="https://dariodezfu.li" title="Portfolio"></iframe>
+
+        <!-- Overlay over the right iframe to detect clicks -->
+        <div class="overlay" onclick="openFullPage()"></div>
+    </div>
+
+    <script>
+        function openFullPage() {
+            window.location.href = "file:///Users/dario/Dropbox/_websites/_COUNTDOWN_MULTIPLY_REEL/index.html"; // Redirect to the iframe's URL
+        }
+    </script>
+</body>
+</html>
