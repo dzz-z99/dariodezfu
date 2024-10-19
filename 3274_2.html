@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
-    <title>2undefined</title>
+    <title>3undefined</title>
     <style>
         body {
             margin: 0;
@@ -96,7 +96,9 @@
         }
 
         #screensaver {
-            display: none;
+            opacity: 0;
+            pointer-events: none; /* Prevent interaction when screensaver is hidden */
+            transition: opacity 0.5s ease; /* Smooth transition for hiding/showing */
             position: fixed;
             top: 0;
             left: 0;
@@ -107,7 +109,8 @@
         }
 
         #screensaver.active {
-            display: block;
+            opacity: 1;
+            pointer-events: all; /* Enable interaction when screensaver is visible */
         }
 
         iframe {
