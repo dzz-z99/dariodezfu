@@ -1,149 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="noindex, nofollow">
-    <title>3undefined</title>
+    <!-- [Your existing head content] -->
     <style>
-        body {
-            margin: 0;
-            height: 100vh;
-            position: relative;
-            font-size: 2em;
-            font-weight: bold;
-            color: #fff;
-            display: flex;
-            justify-content: left;
-            align-items: center;
-        }
+        /* [Your existing styles] */
 
-        @media only screen and (max-width: 768px) {
-            html, body {
-                height: 100%;
-                margin: 0;
-            }
-            body {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-        }
-
-        #video-background {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 34%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 1;
-        }
-
-        #left-content {
-            width: 80%;
-            display: flex;
-            justify-content: left;
-            align-items: left;
-            text-align: center;
-            position: relative;
-            z-index: 2;
-            background-color: rgba(0, 0, 0, 0.3);
-            background-image: url('images/img20230818_229 copy 2.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-
-        #countdown {
-            z-index: 4;
-            padding: 20px;
-        }
-
-        small {
-            position: fixed;
-            bottom: 0px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 16px;
-            font-weight: normal;
-            text-align: left;
-            padding: 10px;
-            z-index: 9999;
-            width: 100%;
-        }
-
-        a {
-            text-decoration: none;
-        }
-
-        .subscription-box {
-            width: 100%;
-            padding: 0px;
-            text-align: center;
-            border: 0.5px solid transparent;
-            border-radius: 0px;
-            background-color: rgba(0, 0, 0, 0);
-            position: fixed;
-            top: 5px;
-            margin-right: 5px;
-            margin-left: 5px;
-            z-index: 1000;
-            color: black;
-            font-family: "Times New Roman", Times, serif;
-            font-size: 10px;
-            font-weight: normal;
-        }
-
+        /* Full-screen iframe screensaver */
         #screensaver {
-            opacity: 0;
-            pointer-events: none; /* Prevent interaction when screensaver is hidden */
-            transition: opacity 0.5s ease; /* Smooth transition for hiding/showing */
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: 99999;
-            background-color: rgba(0, 0, 0, 0.9);
+            /* No background color here to allow iframe content to show */
         }
 
-        #screensaver.active {
-            opacity: 1;
-            pointer-events: all; /* Enable interaction when screensaver is visible */
-        }
-
-        iframe {
+        #screensaver iframe {
             width: 100%;
             height: 100%;
             border: none;
         }
+
+        /* Overlay to capture events */
+        #screensaver-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent; /* Fully transparent */
+            z-index: 1; /* Higher than iframe within screensaver */
+        }
     </style>
 </head>
 <body>
+    <!-- [Your existing body content] -->
 
-    <div id="left-content">
-        <div id="countdown">
-            <!-- Countdown timer will be inserted here by JavaScript -->
-        </div>
-    </div>
-
-    <small>
-        <!-- Links here -->
-    </small>
-
-    <div class="subscription-box">
-        <form id="subscription-form">
-            <input type="email" id="email" placeholder="Email Address" required>
-            <button type="submit">Subscribe</button>
-        </form>
-        <p id="message" class="success-message" style="display: none;">Thank you for subscribing!</p>
-        <p id="error-message" class="error-message" style="display: none;">Something went wrong. Please try again.</p>
-    </div>
-
-    <!-- Screen saver iframe -->
+    <!-- Screen saver -->
     <div id="screensaver">
         <iframe src="https://dariodezfu.li/clock"></iframe>
+        <!-- Transparent overlay to capture events -->
+        <div id="screensaver-overlay"></div>
     </div>
 
     <script>
@@ -151,13 +50,23 @@
 
         // Function to show the screensaver
         function showScreensaver() {
-            document.getElementById('screensaver').classList.add('active');
+            document.getElementById('screensaver').style.display = 'block';
+            // Start listening to events on the overlay
+            document.getElementById('screensaver-overlay').addEventListener('mousemove', hideScreensaver);
+            document.getElementById('screensaver-overlay').addEventListener('keydown', hideScreensaver);
+            document.getElementById('screensaver-overlay').addEventListener('click', hideScreensaver);
+            document.getElementById('screensaver-overlay').addEventListener('scroll', hideScreensaver);
         }
 
         // Function to hide the screensaver
         function hideScreensaver() {
-            document.getElementById('screensaver').classList.remove('active');
+            document.getElementById('screensaver').style.display = 'none';
             resetIdleTimer();
+            // Remove event listeners from the overlay to prevent memory leaks
+            document.getElementById('screensaver-overlay').removeEventListener('mousemove', hideScreensaver);
+            document.getElementById('screensaver-overlay').removeEventListener('keydown', hideScreensaver);
+            document.getElementById('screensaver-overlay').removeEventListener('click', hideScreensaver);
+            document.getElementById('screensaver-overlay').removeEventListener('scroll', hideScreensaver);
         }
 
         // Reset the idle timer and set the screensaver timeout
@@ -166,12 +75,12 @@
             idleTimeout = setTimeout(showScreensaver, 30000); // Show screensaver after 30 seconds of inactivity
         }
 
-        // Attach event listeners to all user interactions
+        // Attach event listeners to all user interactions on the main page
         function attachActivityListeners() {
-            window.addEventListener('mousemove', hideScreensaver);
-            window.addEventListener('keydown', hideScreensaver);
-            window.addEventListener('click', hideScreensaver);
-            window.addEventListener('scroll', hideScreensaver);
+            window.addEventListener('mousemove', resetIdleTimer);
+            window.addEventListener('keydown', resetIdleTimer);
+            window.addEventListener('click', resetIdleTimer);
+            window.addEventListener('scroll', resetIdleTimer);
         }
 
         // Initialize the screensaver functionality
@@ -182,31 +91,7 @@
 
         initializeScreensaver();
 
-        // Countdown timer script
-        function updateCountdown() {
-            const targetDate = new Date("2031-02-03T00:00:00").getTime();
-            const now = new Date().getTime();
-            const distance = targetDate - now;
-
-            const years = Math.floor(distance / (1000 * 60 * 60 * 24 * 365));
-            const months = Math.floor((distance % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24 * 30));
-            const days = Math.floor((distance % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            document.getElementById("countdown").innerHTML =
-                `${years} years, ${months} months, ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
-
-            if (distance < 0) {
-                clearInterval(interval);
-                document.getElementById("countdown").innerHTML = "The date has passed";
-            }
-        }
-
-        const interval = setInterval(updateCountdown, 1000);
-        updateCountdown();
+        // [Your existing countdown timer script]
     </script>
-
 </body>
 </html>
