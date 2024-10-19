@@ -1,56 +1,64 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Prevent zooming to avoid layout issues -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Responsive Split Window with Iframes</title>
     <style>
-        body, html {
+        /* Reset default margins and paddings */
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
             height: 100%;
-            width: 100%;
+            overflow: hidden; /* Prevent scrolling */
         }
 
         .container {
             display: flex;
-            height: 100vh; /* Full viewport height */
-            width: 100vw;  /* Full viewport width */
-            position: relative; /* For absolute positioning of overlay */
+            flex-direction: row; /* Default layout for desktop */
+            width: 100%;
+            height: 100%;
+            position: relative; /* For positioning the overlay */
         }
 
-        .iframe-left, .iframe-right {
-            flex: 1; /* Each takes up half the width */
-            border: none; /* Remove iframe borders */
+        .iframe {
+            border: none;
+            flex: 1; /* Equal space for both iframes */
+            width: 100%; /* Ensure iframes take full width in mobile */
             height: 100%; /* Full height */
-            width: 100%; /* Full width */
         }
 
         .overlay {
             position: absolute;
-            right: 0; /* Place over the right iframe */
+            right: 0;
             top: 0;
+            width: 50%; /* Cover right half on desktop */
             height: 100%;
-            width: 50%;
-            cursor: pointer; /* Change cursor to indicate clickable */
-            z-index: 10; /* Higher than iframes to detect clicks */
-            background: transparent; /* Invisible */
+            cursor: pointer;
+            z-index: 10;
+            background: transparent;
         }
 
         /* Media Query for Small Screens */
         @media (max-width: 768px) {
             .container {
-                flex-direction: column; /* Change to vertical stacking */
+                flex-direction: column; /* Stack iframes vertically */
             }
 
-            .iframe-left, .iframe-right, .overlay {
-                height: 50vh; /* Each iframe and overlay takes half the viewport height */
-                width: 100%; /* Full width */
+            .iframe {
+                height: 50%; /* Each iframe takes up half of the viewport height */
             }
 
             .overlay {
-                bottom: 0; /* Place over the bottom iframe */
+                top: 50%; /* Position overlay over the bottom iframe */
+                left: 0;
+                width: 100%; /* Cover full width */
+                height: 50%; /* Cover bottom half */
             }
         }
     </style>
@@ -58,18 +66,18 @@
 <body>
     <div class="container">
         <!-- Left iframe -->
-        <iframe class="iframe-left" src="https://dariodezfu.li/clock" title="Clock"></iframe>
+        <iframe class="iframe iframe-left" src="https://dariodezfu.li/clock" title="Clock"></iframe>
 
         <!-- Right iframe -->
-        <iframe class="iframe-right" src="https://dariodezfu.li/snowballs.html" title="Portfolio"></iframe>
+        <iframe class="iframe iframe-right" src="https://dariodezfu.li/snowballs.html" title="Portfolio"></iframe>
 
-        <!-- Overlay over the right iframe to detect clicks -->
+        <!-- Overlay to detect clicks -->
         <div class="overlay" onclick="openFullPage()"></div>
     </div>
 
     <script>
         function openFullPage() {
-            window.location.href = "https://dariodezfu.li/3274"; // Redirect to the iframe's URL
+            window.location.href = "https://dariodezfu.li/3274"; // Redirect to the desired URL
         }
     </script>
 </body>
