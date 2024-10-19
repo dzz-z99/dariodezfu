@@ -208,53 +208,36 @@
     </div>
 
     <script>
-        // Idle timer variables
-        let idleTime = 0;
-        const idleLimit = 30; // 30 seconds of inactivity
-        let idleInterval = null;
+        let idleTimeout;
 
-        // Show the screensaver iframe
-        function showScreenSaver() {
+        // Show screensaver after a certain amount of idle time
+        function showScreensaver() {
             document.getElementById('screensaver').style.display = 'block';
         }
 
-        // Hide the screensaver iframe
-        function hideScreenSaver() {
+        // Hide screensaver and reset the idle timer
+        function hideScreensaver() {
             document.getElementById('screensaver').style.display = 'none';
             resetIdleTimer();
         }
 
-        // Reset the idle timer
+        // Reset the idle timer by clearing and restarting the timeout
         function resetIdleTimer() {
-            idleTime = 0;
-            clearInterval(idleInterval); // Stop the idle timer
-            idleInterval = setInterval(incrementIdleTime, 1000); // Restart the idle timer
+            clearTimeout(idleTimeout);
+            idleTimeout = setTimeout(showScreensaver, 30000); // Show after 30 seconds of inactivity
         }
 
-        // Increment the idle time every second
-        function incrementIdleTime() {
-            idleTime++;
-            if (idleTime >= idleLimit) {
-                showScreenSaver(); // Show the screensaver if idle time exceeds limit
-            }
-        }
-
-        // Attach event listeners to reset the idle timer on interaction
+        // Attach listeners to all user interactions
         function attachActivityListeners() {
-            window.addEventListener('mousemove', hideScreenSaver, { once: true });
-            window.addEventListener('keydown', hideScreenSaver, { once: true });
-            window.addEventListener('click', hideScreenSaver, { once: true });
-            window.addEventListener('scroll', hideScreenSaver, { once: true });
+            window.addEventListener('mousemove', hideScreensaver);
+            window.addEventListener('keydown', hideScreensaver);
+            window.addEventListener('click', hideScreensaver);
+            window.addEventListener('scroll', hideScreensaver);
         }
 
-        // Initialize the idle timer
-        function startIdleTimer() {
-            resetIdleTimer();
-            attachActivityListeners(); // Listen for interactions
-        }
-
-        // Start the idle timer when the page loads
-        startIdleTimer();
+        // Start the idle timer on page load
+        attachActivityListeners();
+        resetIdleTimer();
 
         // Countdown timer script
         function updateCountdown() {
