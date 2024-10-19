@@ -208,38 +208,53 @@
     </div>
 
     <script>
-        // Inactivity timer for screen saver
+        // Idle timer variables
         let idleTime = 0;
-        let idleInterval;
+        const idleLimit = 30; // 30 seconds of inactivity
+        let idleInterval = null;
 
-        function resetTimer() {
-            idleTime = 0;
+        // Show the screensaver iframe
+        function showScreenSaver() {
+            document.getElementById('screensaver').style.display = 'block';
+        }
+
+        // Hide the screensaver iframe
+        function hideScreenSaver() {
             document.getElementById('screensaver').style.display = 'none';
+            resetIdleTimer();
         }
 
+        // Reset the idle timer
+        function resetIdleTimer() {
+            idleTime = 0;
+            clearInterval(idleInterval); // Stop the idle timer
+            idleInterval = setInterval(incrementIdleTime, 1000); // Restart the idle timer
+        }
+
+        // Increment the idle time every second
+        function incrementIdleTime() {
+            idleTime++;
+            if (idleTime >= idleLimit) {
+                showScreenSaver(); // Show the screensaver if idle time exceeds limit
+            }
+        }
+
+        // Attach event listeners to reset the idle timer on interaction
+        function attachActivityListeners() {
+            window.addEventListener('mousemove', hideScreenSaver, { once: true });
+            window.addEventListener('keydown', hideScreenSaver, { once: true });
+            window.addEventListener('click', hideScreenSaver, { once: true });
+            window.addEventListener('scroll', hideScreenSaver, { once: true });
+        }
+
+        // Initialize the idle timer
         function startIdleTimer() {
-            idleInterval = setInterval(function () {
-                idleTime++;
-                if (idleTime > 30) { // 30 seconds of inactivity
-                    document.getElementById('screensaver').style.display = 'block';
-                }
-            }, 1000);
+            resetIdleTimer();
+            attachActivityListeners(); // Listen for interactions
         }
 
-        function resetAndStartIdleTimer() {
-            resetTimer(); // Hide the screensaver
-            clearInterval(idleInterval); // Clear the existing interval
-            startIdleTimer(); // Restart the idle timer
-        }
-
-        // Start the idle timer on page load
+        // Start the idle timer when the page loads
         startIdleTimer();
-
-        // Reset idle timer on any user activity
-        window.onmousemove = resetAndStartIdleTimer;
-        window.onkeydown = resetAndStartIdleTimer;
-        window.onclick = resetAndStartIdleTimer;
-        window.onscroll = resetAndStartIdleTimer;
 
         // Countdown timer script
         function updateCountdown() {
