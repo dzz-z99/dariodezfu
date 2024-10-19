@@ -55,22 +55,6 @@
             background-repeat: no-repeat;
         }
 
-        #left-content:hover {
-            filter: grayscale(0%);
-        }
-
-        #multiply-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 3;
-            pointer-events: none;
-            mix-blend-mode: multiply;
-            object-fit: fill;
-        }
-
         #countdown {
             z-index: 4;
             padding: 20px;
@@ -111,42 +95,6 @@
             font-weight: normal;
         }
 
-        .subscription-box input[type="email"] {
-            width: 20%;
-            padding: 5px 10px;
-            margin-bottom: 1px;
-            border-radius: 0px;
-            font-size: 10px;
-            border: 1px solid #ccc;
-        }
-
-        .subscription-box button {
-            padding: 0px;
-            width: 20%;
-            border: none;
-            background-color: #b3d3fb;
-            color: #551A8B;
-            border-radius: 0px;
-            font-size: 10px;
-            cursor: pointer;
-        }
-
-        .subscription-box button:hover {
-            background-color: #fef2ff;
-        }
-
-        .success-message {
-            color: green;
-            margin-top: 5px;
-            font-size: 20px;
-        }
-
-        .error-message {
-            color: red;
-            margin-top: 5px;
-        }
-
-        /* Full-screen iframe screensaver */
         #screensaver {
             display: none;
             position: fixed;
@@ -162,22 +110,6 @@
             width: 100%;
             height: 100%;
             border: none;
-        }
-
-        /* Media Query for Mobile */
-        @media only screen and (max-width: 768px) {
-            .subscription-box {
-                font-size: 16px;
-            }
-
-            .subscription-box input[type="email"] {
-                width: 80%;
-            }
-
-            .subscription-box button {
-                width: 20%;
-                font-size: 16px;
-            }
         }
     </style>
 </head>
@@ -210,34 +142,33 @@
     <script>
         let idleTimeout;
 
-        // Show screensaver after a certain amount of idle time
         function showScreensaver() {
             document.getElementById('screensaver').style.display = 'block';
         }
 
-        // Hide screensaver and reset the idle timer
         function hideScreensaver() {
             document.getElementById('screensaver').style.display = 'none';
             resetIdleTimer();
         }
 
-        // Reset the idle timer by clearing and restarting the timeout
         function resetIdleTimer() {
             clearTimeout(idleTimeout);
-            idleTimeout = setTimeout(showScreensaver, 30000); // Show after 30 seconds of inactivity
+            idleTimeout = setTimeout(showScreensaver, 30000); // 30 seconds of inactivity
         }
 
-        // Attach listeners to all user interactions
-        function attachActivityListeners() {
-            window.addEventListener('mousemove', hideScreensaver);
-            window.addEventListener('keydown', hideScreensaver);
-            window.addEventListener('click', hideScreensaver);
-            window.addEventListener('scroll', hideScreensaver);
+        function attachListeners() {
+            window.addEventListener('mousemove', resetIdleTimer);
+            window.addEventListener('keydown', resetIdleTimer);
+            window.addEventListener('click', resetIdleTimer);
+            window.addEventListener('scroll', resetIdleTimer);
         }
 
-        // Start the idle timer on page load
-        attachActivityListeners();
-        resetIdleTimer();
+        function initialize() {
+            attachListeners();
+            resetIdleTimer(); // Initialize the idle timer on page load
+        }
+
+        initialize();
 
         // Countdown timer script
         function updateCountdown() {
