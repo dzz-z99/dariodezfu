@@ -106,6 +106,10 @@
             background-color: rgba(0, 0, 0, 0.9);
         }
 
+        #screensaver.active {
+            display: block;
+        }
+
         iframe {
             width: 100%;
             height: 100%;
@@ -142,33 +146,38 @@
     <script>
         let idleTimeout;
 
+        // Function to show the screensaver
         function showScreensaver() {
-            document.getElementById('screensaver').style.display = 'block';
+            document.getElementById('screensaver').classList.add('active');
         }
 
+        // Function to hide the screensaver
         function hideScreensaver() {
-            document.getElementById('screensaver').style.display = 'none';
+            document.getElementById('screensaver').classList.remove('active');
             resetIdleTimer();
         }
 
+        // Reset the idle timer and set the screensaver timeout
         function resetIdleTimer() {
             clearTimeout(idleTimeout);
-            idleTimeout = setTimeout(showScreensaver, 30000); // 30 seconds of inactivity
+            idleTimeout = setTimeout(showScreensaver, 30000); // Show screensaver after 30 seconds of inactivity
         }
 
-        function attachListeners() {
-            window.addEventListener('mousemove', resetIdleTimer);
-            window.addEventListener('keydown', resetIdleTimer);
-            window.addEventListener('click', resetIdleTimer);
-            window.addEventListener('scroll', resetIdleTimer);
+        // Attach event listeners to all user interactions
+        function attachActivityListeners() {
+            window.addEventListener('mousemove', hideScreensaver);
+            window.addEventListener('keydown', hideScreensaver);
+            window.addEventListener('click', hideScreensaver);
+            window.addEventListener('scroll', hideScreensaver);
         }
 
-        function initialize() {
-            attachListeners();
-            resetIdleTimer(); // Initialize the idle timer on page load
+        // Initialize the screensaver functionality
+        function initializeScreensaver() {
+            attachActivityListeners();
+            resetIdleTimer(); // Start the idle timer on page load
         }
 
-        initialize();
+        initializeScreensaver();
 
         // Countdown timer script
         function updateCountdown() {
