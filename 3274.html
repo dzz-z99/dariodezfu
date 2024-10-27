@@ -1,4 +1,7 @@
 
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -168,6 +171,33 @@ a {
             background-color: #b3d3fb; /* or any color you prefer */
         }
 
+/* Screensaver Styles */
+        #screensaver {
+            display: none; /* Initially hidden */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 99999;
+        }
+
+        #screensaver iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Overlay to capture events */
+        #screensaver-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent; /* Fully transparent */
+            z-index: 1; /* Higher than iframe within screensaver */
+        }
         
     </style>
 </head>
@@ -216,88 +246,70 @@ a {
     </div>
 
     
+<!-- Screensaver -->
+    <div id="screensaver">
+        <iframe src="https://dariodezfu.li/clock"></iframe>
+        <!-- Transparent overlay to capture events -->
+        <div id="screensaver-overlay"></div>
+    </div>
+
+    <!-- Scripts -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const overlay = document.getElementById('multiply-overlay');
-            const imageCount = 6;
-            let currentImage = 1;
+        // Screensaver Functionality
+        let idleTimeout;
 
-            function changeImage() {
-                currentImage = (currentImage % imageCount) + 1;
-                overlay.src = `reel/${String(currentImage).padStart(2, '0')}.png`;
-            }
+        // Function to show the screensaver
+        function showScreensaver() {
+            document.getElementById('screensaver').style.display = 'block';
+            // Start listening to events on the overlay
+            const overlay = document.getElementById('screensaver-overlay');
+            overlay.addEventListener('mousemove', hideScreensaver);
+            overlay.addEventListener('keydown', hideScreensaver);
+            overlay.addEventListener('click', hideScreensaver);
+            overlay.addEventListener('scroll', hideScreensaver);
+            overlay.addEventListener('touchstart', hideScreensaver); // For mobile devices
+            overlay.addEventListener('touchmove', hideScreensaver);  // For mobile devices
+        }
 
-            setInterval(changeImage, 1000); // Change image every 4 seconds
-        });
+        // Function to hide the screensaver
+        function hideScreensaver() {
+            document.getElementById('screensaver').style.display = 'none';
+            resetIdleTimer();
+            // Remove event listeners from the overlay to prevent memory leaks
+            const overlay = document.getElementById('screensaver-overlay');
+            overlay.removeEventListener('mousemove', hideScreensaver);
+            overlay.removeEventListener('keydown', hideScreensaver);
+            overlay.removeEventListener('click', hideScreensaver);
+            overlay.removeEventListener('scroll', hideScreensaver);
+            overlay.removeEventListener('touchstart', hideScreensaver);
+            overlay.removeEventListener('touchmove', hideScreensaver);
+        }
 
-                document.addEventListener('DOMContentLoaded', function() {
-            const imageContainer = document.getElementById('image-container');
-            const largeImageDisplay = document.getElementById('large-image-display');
-            const imageFolder = 'images/';
-            const largeImageFolder = 'large-images/';
-            const imageCount = 2; // Number of images
+        // Reset the idle timer and set the screensaver timeout
+        function resetIdleTimer() {
+            clearTimeout(idleTimeout);
+            idleTimeout = setTimeout(showScreensaver, 30000); // Show screensaver after 30 seconds of inactivity
+        }
 
-            // Generate image list
-            const imageList = Array.from({ length: imageCount }, (v, i) => `${String(i + 1).padStart(2, '0')}.gif`);
+        // Attach event listeners to all user interactions on the main page
+        function attachActivityListeners() {
+            window.addEventListener('mousemove', resetIdleTimer);
+            window.addEventListener('keydown', resetIdleTimer);
+            window.addEventListener('click', resetIdleTimer);
+            window.addEventListener('scroll', resetIdleTimer);
+            window.addEventListener('touchstart', resetIdleTimer); // For mobile devices
+            window.addEventListener('touchmove', resetIdleTimer);  // For mobile devices
+        }
 
-            // List of URLs
-            const urlList = [
-                'https://dariodezfu.li/clock', 'https://z99zzd.net'
-            ];
+        // Initialize the screensaver functionality
+        function initializeScreensaver() {
+            attachActivityListeners();
+            resetIdleTimer(); // Start the idle timer on page load
+        }
 
-            function shuffle(array) {
-                for (let i = array.length - 1; i > 0; i--) {
-                    const j = Math.floor(Math.random() * (i + 1));
-                    [array[i], array[j]] = [array[j], array[i]];
-                }
-            }
+        initializeScreensaver();
 
-            // Shuffle image list and URL list
-            shuffle(imageList);
-            shuffle(urlList);
-
-            function setPosition(link) {
-                const imgSize = 60;
-                const x = Math.random() * (window.innerWidth - imgSize);
-                const y = Math.random() * (window.innerHeight - imgSize);
-                link.style.left = `${x}px`;
-                link.style.top = `${y}px`;
-            }
-
-            imageList.forEach((imageName, index) => {
-                const link = document.createElement('a');
-                link.href = urlList[index];
-                link.className = 'image-link';
-
-                const img = document.createElement('img');
-                img.src = imageFolder + imageName;
-                img.alt = imageName;
-
-                link.appendChild(img);
-                imageContainer.appendChild(link);
-
-                // Set initial random position within the viewport
-                setPosition(link);
-
-                // Hover event to show large image
-                link.addEventListener('mouseover', function() {
-                    const largeImageName = imageName.replace('.gif', '.jpg'); // Assuming large images are .jpg
-                    const largeImagePath = `${largeImageFolder}${largeImageName}`;
-                    console.log("Loading image:", largeImagePath); // Log image path
-                    largeImageDisplay.src = largeImagePath;
-                    largeImageDisplay.style.display = 'block';
-                });
-
-                // Mouse out event to hide large image
-                link.addEventListener('mouseout', function() {
-                    largeImageDisplay.style.display = 'none';
-                });
-
-                // Adjust position on resize
-                window.addEventListener('resize', () => setPosition(link));
-            });
-        });
-
+        // Countdown Timer Script
         function updateCountdown() {
             const targetDate = new Date("2031-02-03T00:00:00").getTime();
             const now = new Date().getTime();
@@ -320,15 +332,10 @@ a {
         }
 
         const interval = setInterval(updateCountdown, 1000);
-        updateCountdown();  // Initial call to display countdown immediately
-    </script>
+        updateCountdown(); // Initial call to display countdown immediately
 
-<script>
-        const form = document.getElementById('subscription-form');
-        const message = document.getElementById('message');
-        const errorMessage = document.getElementById('error-message');
-
-        form.addEventListener('submit', function (e) {
+        // Subscription Form Script (Assuming you have a backend to handle the subscription)
+        document.getElementById('subscription-form').addEventListener('submit', function (e) {
             e.preventDefault();
 
             const email = document.getElementById('email').value;
@@ -338,27 +345,27 @@ a {
 
             fetch(scriptURL, {
                 method: 'POST',
-                body: new URLSearchParams({'email': email}),
+                body: new URLSearchParams({ 'email': email }),
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 }
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === "success") {
-                    message.style.display = 'block';
-                    errorMessage.style.display = 'none';
-                    form.reset();
-                } else {
-                    message.style.display = 'none';
-                    errorMessage.style.display = 'block';
-                }
-            })
-            .catch(error => {
-                console.error('Error!', error);
-                message.style.display = 'none';
-                errorMessage.style.display = 'block';
-            });
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === "success") {
+                        document.getElementById('message').style.display = 'block';
+                        document.getElementById('error-message').style.display = 'none';
+                        document.getElementById('subscription-form').reset();
+                    } else {
+                        document.getElementById('message').style.display = 'none';
+                        document.getElementById('error-message').style.display = 'block';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error!', error);
+                    document.getElementById('message').style.display = 'none';
+                    document.getElementById('error-message').style.display = 'block';
+                });
         });
     </script>
     
