@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="ar">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Font Consistency Example</title>
+  <title>undefined</title>
   <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
   <style>
     * {
@@ -62,101 +63,111 @@
   </div>
 
 <script>
+    // Create a single AudioContext
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+    // Resume AudioContext on user interaction
+    document.addEventListener('click', function() {
+        if (audioContext.state === 'suspended') {
+            audioContext.resume();
+        }
+    });
+
     const digits = ['ظ', 'ز', 'ذ', 'ض']; // Define possible values for each digit
     let currentIndex = [0, 0, 0]; // Initialize index for current combination
 
     function updateDisplay() {
-      // Get the digit elements by their IDs
-      const digit1 = document.getElementById('digit1');
-      const digit2 = document.getElementById('digit2');
-      const digit3 = document.getElementById('digit3');
+        // Get the digit elements by their IDs
+        const digit1 = document.getElementById('digit1');
+        const digit2 = document.getElementById('digit2');
+        const digit3 = document.getElementById('digit3');
 
-      // Set the text content of each digit to the current combination
-      digit1.textContent = digits[currentIndex[0]];
-      digit2.textContent = digits[currentIndex[1]];
-      digit3.textContent = digits[currentIndex[2]];
+        // Set the text content of each digit to the current combination
+        digit1.textContent = digits[currentIndex[0]];
+        digit2.textContent = digits[currentIndex[1]];
+        digit3.textContent = digits[currentIndex[2]];
 
-      // Play the background sound
-      playBackgroundSound();
+        // Play the background sound
+        playBackgroundSound();
+    }
+
+    function playBackgroundSound() {
+        // Create an oscillator node for the main sound
+        const oscillator = audioContext.createOscillator();
+        oscillator.type = 'sawtooth'; // Set oscillator type to sawtooth wave for a more organic sound
+
+        // Set frequency and amplitude
+        oscillator.frequency.value = 200; // Set a fixed frequency
+        oscillator.detune.value = 100; // Slight detuning for a more organic sound
+
+        // Set the gain node for amplitude modulation
+        const gainNode = audioContext.createGain();
+        gainNode.gain.value = 0.5; // Set a fixed amplitude
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+
+        // Start the oscillator
+        const currentTime = audioContext.currentTime;
+        oscillator.start(currentTime);
+
+        // Set a very short envelope to make the sound shorter and sharper
+        gainNode.gain.setValueAtTime(0, currentTime); // Start from silence
+        gainNode.gain.linearRampToValueAtTime(0.5, currentTime + 0.001); // Attack time of 1 ms
+        gainNode.gain.linearRampToValueAtTime(0, currentTime + 0.002); // Release time of 2 ms
+
+        // Stop the oscillator after the duration
+        oscillator.stop(currentTime + 0.002); // Total duration of 2 ms
     }
 
     function generateCombinations() {
-      const combinations = [];
-      for (let i = 0; i < digits.length; i++) {
-        for (let j = 0; j < digits.length; j++) {
-          for (let k = 0; k < digits.length; k++) {
-            combinations.push([i, j, k]);
-          }
+        const combinations = [];
+        for (let i = 0; i < digits.length; i++) {
+            for (let j = 0; j < digits.length; j++) {
+                for (let k = 0; k < digits.length; k++) {
+                    combinations.push([i, j, k]);
+                }
+            }
         }
-      }
-      return combinations;
+        return combinations;
     }
 
     const combinations = generateCombinations();
 
     function nextCombination() {
-      // Increment index and wrap around if it exceeds the number of combinations
-      currentIndex[2]++;
-      if (currentIndex[2] >= digits.length) {
-        currentIndex[2] = 0;
-        currentIndex[1]++;
-        if (currentIndex[1] >= digits.length) {
-          currentIndex[1] = 0;
-          currentIndex[0]++;
-          if (currentIndex[0] >= digits.length) {
-            currentIndex = [0, 0, 0]; // Reset back to the beginning
-          }
+        // Increment index and wrap around if it exceeds the number of combinations
+        currentIndex[2]++;
+        if (currentIndex[2] >= digits.length) {
+            currentIndex[2] = 0;
+            currentIndex[1]++;
+            if (currentIndex[1] >= digits.length) {
+                currentIndex[1] = 0;
+                currentIndex[0]++;
+                if (currentIndex[0] >= digits.length) {
+                    currentIndex = [0, 0, 0]; // Reset back to the beginning
+                }
+            }
         }
-      }
-      updateDisplay();
-    }
-
-    function playBackgroundSound() {
-      // Create an audio context
-      const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-
-      // Create an oscillator node for the main sound
-      const oscillator = audioContext.createOscillator();
-      oscillator.type = 'sawtooth'; // Set oscillator type to sawtooth wave for a more organic sound
-
-      // Set frequency and amplitude
-      oscillator.frequency.value = 200; // Set a fixed frequency
-      oscillator.detune.value = 100; // Slight detuning for a more organic sound
-
-      // Set the gain node for amplitude modulation
-      const gainNode = audioContext.createGain();
-      gainNode.gain.value = 0.5; // Set a fixed amplitude
-      oscillator.connect(gainNode);
-      gainNode.connect(audioContext.destination);
-
-      // Start the oscillator
-      oscillator.start();
-
-      // Set a very short envelope to make the sound shorter and sharper
-      const currentTime = audioContext.currentTime;
-      gainNode.gain.setValueAtTime(0, currentTime); // Start from silence
-      gainNode.gain.linearRampToValueAtTime(0.5, currentTime + 0.001); // Attack time of 1 ms
-      gainNode.gain.linearRampToValueAtTime(0, currentTime + 0.002); // Release time of 2 ms
-      oscillator.stop(currentTime + 0.002); // Total duration of 2 ms
+        updateDisplay();
     }
 
     function updateClock() {
-      const now = new Date();
-      const hours = String(now.getHours()).padStart(2, '0');
-      const minutes = String(now.getMinutes()).padStart(2, '0');
-      const seconds = String(now.getSeconds()).padStart(2, '0');
-      document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
     }
 
     // Call nextCombination function every second
     setInterval(() => {
-      nextCombination();
-      updateClock(); // Update the clock every second
+        nextCombination();
+        updateClock(); // Update the clock every second
     }, 1000);
 
     // Initial update of clock
     updateClock();
-  </script>
+</script>
+
 
 </body>
 </html>
