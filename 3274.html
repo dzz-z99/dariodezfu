@@ -218,6 +218,10 @@ a {
         </div>
     </div>
 
+    <!-- GIF Image Link -->
+    <div id="image-container"></div>
+
+    
    <!-- <img id="multiply-overlay" src="reel/01.png" alt="Overlay"> -->
 
 
@@ -264,6 +268,45 @@ a {
 
     <!-- Scripts -->
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const imageContainer = document.getElementById('image-container');
+            const imageFolder = 'images/';
+            const randomImageIndex = Math.floor(Math.random() * 15) + 1; // Random number from 1 to 15
+            const imageName = String(randomImageIndex).padStart(2, '0') + '.gif'; // Format as 01.gif, 02.gif, etc.
+            const imageLinkUrl = 'https://z99zzd.net'; // Link URL
+
+            // Create a link element
+            const link = document.createElement('a');
+            link.href = imageLinkUrl;
+            link.className = 'image-link';
+
+            // Create an image element and set its properties
+            const img = document.createElement('img');
+            img.src = imageFolder + imageName;
+            img.alt = imageName;
+
+            // Append image to link, and link to container
+            link.appendChild(img);
+            imageContainer.appendChild(link);
+
+            // Set random initial position within the viewport
+            function setPosition(link) {
+                const imgSize = 60;
+                const x = Math.random() * (window.innerWidth - imgSize);
+                const y = Math.random() * (window.innerHeight - imgSize);
+                link.style.left = `${x}px`;
+                link.style.top = `${y}px`;
+            }
+
+            setPosition(link);
+
+            // Adjust position on resize
+            window.addEventListener('resize', () => setPosition(link));
+        });
+
+
+
+        
         // Screensaver Functionality
         let idleTimeout;
 
