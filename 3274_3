@@ -1,0 +1,394 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta tags and title -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>undefined</title>
+
+    <!-- Styles -->
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            position: relative;
+            font-size: 2em;
+            font-weight: bold;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @media only screen and (max-width: 768px) {
+            html, body {
+                height: 100%;
+                margin: 0;
+            }
+            body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+
+        #video-background {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 34%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+
+
+#left-content {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0);
+    color: white; /* White text color */
+        border: 0.5px solid #ccc; /* White border around the element */
+    text-shadow: 
+        -5.5px -2.5px 0 #ccc,
+         0.5px -2.5px 0 #ccc,
+        -5.5px  0.5px 0 #ccc,
+         0.5px  2.5px 0 #ccc;
+    /* background-image: url('images/img20230818_229 copy 2.jpg'); Add background image */
+    /* background-size: cover; /* Make the image cover the entire div */
+    /* background-position: center; /* Center the image */
+    /* background-repeat: no-repeat; /* Prevent the image from repeating */
+}
+
+        #left-content:hover {
+            filter: grayscale(0%); /* Remove grayscale on hover */
+        }
+
+        #multiply-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
+            pointer-events: none;
+            mix-blend-mode: multiply;
+            object-fit: fill;
+        }
+
+        #countdown {
+            z-index: 4;
+            padding: 20px;
+        }
+
+        small {
+            position: fixed;
+            bottom: 0px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 16px;
+            font-weight: normal;
+            text-align: center;
+            padding: 10px;
+            z-index: 9999;
+            width: 100%;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+.subscription-box {
+    width: 100%;
+    padding: 0px;
+    text-align: center;
+    border: 0.5px solid transparent;
+    border-radius: 0px;
+    background-color: rgba(0, 0, 0, 0); /* Makes it semi-transparent */
+    position: fixed;  /* Ensures it floats */
+    top: 5px;     /* Position it 10px from the bottom */
+    margin-right: 5px;      /* Position it 10px from the right */
+    margin-left: 5px;      /* Position it 10px from the right */
+    z-index: 1000;    /* Ensures it stays on top of other elements */
+    color: black;     /* Text color for better readability */
+    font-family: "Times New Roman", Times, serif;
+    font-size: 10px;
+    font-weight: normal;
+
+
+}
+
+.subscription-box input[type="email"] {
+    width: 20%;
+    padding: 5px 10px;
+    margin-bottom: 1px;
+    border-radius: 0px;
+    font-size: 10px;
+    border: 1px solid #ccc;
+    font-family: "Times New Roman", Times, serif;
+            box-shadow: 
+        -5.5px -2.5px 0 #ccc,
+         0.5px -2.5px 0 #ccc,
+        -5.5px  0.5px 0 #ccc,
+         0.5px  2.5px 0 #ccc;
+}
+
+.subscription-box button {
+    padding: 0px;
+        width: 20%;
+    border: none;
+    background-color: white; /* #b3d3fb */
+    color: #757575; /* #551A8B */
+    border-radius: 0px;
+    border: 1px solid #ccc;
+    font-size: 10px;
+    cursor: pointer;
+    font-family: times;
+}
+
+.subscription-box button:hover {
+    background-color: black; /* #b3d3fb */
+    border: none;
+    color: transparent;
+}
+
+        .success-message {
+            color: green;
+            margin-top: 5px;
+            font-size: 20px;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 5px;
+        }
+
+        /* Media Query for Mobile */
+        @media only screen and (max-width: 768px) {
+            .subscription-box {
+                font-size: 16px;
+            }
+
+            .subscription-box input[type="email"] {
+                width: 80%;
+            }
+
+            .subscription-box button {
+                width: 20%;
+                font-size: 16px;
+            }
+        }
+
+        .highlighted-text {
+            background-color: white;
+            border: 0.5px solid transparent;
+    border-radius: 5px;
+                box-shadow: 
+        -55.5px -2.5px 0 #ccc,
+         0.5px -2.5px 0 #ccc,
+        -5.5px  0.5px 0 #ccc,
+         0.5px  2.5px 0 #ccc;
+        }
+
+        /* Screensaver Styles */
+        #screensaver {
+            display: none; /* Initially hidden */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 99999;
+        }
+
+        #screensaver iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Overlay to capture events */
+        #screensaver-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent; /* Fully transparent */
+            z-index: 1; /* Higher than iframe within screensaver */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Left Content -->
+    <div id="left-content">
+        <div id="countdown">
+            <!-- Countdown timer will be inserted here by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Multiply Overlay Image (Optional, if used) -->
+    <!-- <img id="multiply-overlay" src="reel/01.png" alt="Overlay"> -->
+
+    <!-- Links at the Bottom -->
+    <small>
+        <a href="https://z99zzd.net/OCCULTATION-and-HIDING.pdf" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">
+            <span class="highlighted-text">3</span>
+        </a>
+
+        <a href="https://z99zzd.net/files/Barthes-The_Death_of_the_Author.pdf" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">
+            <span class="highlighted-text">2</span>
+        </a>
+
+        <a href="https://z99zzd.net/files/15_eng_articulos_serra.pdf" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">
+            <span class="highlighted-text">7</span>
+        </a>
+
+        <a href="https://z99zzd.net/files/peruffojewelry.com-%20IN%20CONVERSATION%20WITH%20FRANZISKA%20AIGNER.pdf" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">
+            <span class="highlighted-text">4</span>
+        </a>
+    </small>
+
+    <!-- Subscription Box -->
+    <div class="subscription-box">
+        <form id="subscription-form">
+            <input type="email" id="email" placeholder="Email Address" required>
+            <button type="submit">Subscribe</button>
+        </form>
+        <p id="message" class="success-message" style="display: none;">Thank you for subscribing!</p>
+        <p id="error-message" class="error-message" style="display: none;">Something went wrong. Please try again.</p>
+    </div>
+
+    <!-- Screensaver -->
+    <div id="screensaver">
+        <iframe src="https://dariodezfu.li/clock"></iframe>
+        <!-- Transparent overlay to capture events -->
+        <div id="screensaver-overlay"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Screensaver Functionality
+        let idleTimeout;
+
+        // Function to show the screensaver
+        function showScreensaver() {
+            document.getElementById('screensaver').style.display = 'block';
+            // Start listening to events on the overlay
+            const overlay = document.getElementById('screensaver-overlay');
+            overlay.addEventListener('mousemove', hideScreensaver);
+            overlay.addEventListener('keydown', hideScreensaver);
+            overlay.addEventListener('click', hideScreensaver);
+            overlay.addEventListener('scroll', hideScreensaver);
+            overlay.addEventListener('touchstart', hideScreensaver); // For mobile devices
+            overlay.addEventListener('touchmove', hideScreensaver);  // For mobile devices
+        }
+
+        // Function to hide the screensaver
+        function hideScreensaver() {
+            document.getElementById('screensaver').style.display = 'none';
+            resetIdleTimer();
+            // Remove event listeners from the overlay to prevent memory leaks
+            const overlay = document.getElementById('screensaver-overlay');
+            overlay.removeEventListener('mousemove', hideScreensaver);
+            overlay.removeEventListener('keydown', hideScreensaver);
+            overlay.removeEventListener('click', hideScreensaver);
+            overlay.removeEventListener('scroll', hideScreensaver);
+            overlay.removeEventListener('touchstart', hideScreensaver);
+            overlay.removeEventListener('touchmove', hideScreensaver);
+        }
+
+        // Reset the idle timer and set the screensaver timeout
+        function resetIdleTimer() {
+            clearTimeout(idleTimeout);
+            idleTimeout = setTimeout(showScreensaver, 30000); // Show screensaver after 30 seconds of inactivity
+        }
+
+        // Attach event listeners to all user interactions on the main page
+        function attachActivityListeners() {
+            window.addEventListener('mousemove', resetIdleTimer);
+            window.addEventListener('keydown', resetIdleTimer);
+            window.addEventListener('click', resetIdleTimer);
+            window.addEventListener('scroll', resetIdleTimer);
+            window.addEventListener('touchstart', resetIdleTimer); // For mobile devices
+            window.addEventListener('touchmove', resetIdleTimer);  // For mobile devices
+        }
+
+        // Initialize the screensaver functionality
+        function initializeScreensaver() {
+            attachActivityListeners();
+            resetIdleTimer(); // Start the idle timer on page load
+        }
+
+        initializeScreensaver();
+
+        // Countdown Timer Script
+        function updateCountdown() {
+            const targetDate = new Date("2031-02-03T00:00:00").getTime();
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            const years = Math.floor(distance / (1000 * 60 * 60 * 24 * 365));
+            const months = Math.floor((distance % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24 * 30));
+            const days = Math.floor((distance % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown").innerHTML =
+                `${years} years, ${months} months, ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+
+            if (distance < 0) {
+                clearInterval(interval);
+                document.getElementById("countdown").innerHTML = "The date has passed";
+            }
+        }
+
+        const interval = setInterval(updateCountdown, 1000);
+        updateCountdown(); // Initial call to display countdown immediately
+
+        // Subscription Form Script (Assuming you have a backend to handle the subscription)
+        document.getElementById('subscription-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value;
+
+            // Replace this URL with the Web App URL from the Google Apps Script deployment
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbweI72vvZj8aERIOVHX4ObCD5SSD4Gbc7G6v593A4Nj4oK5ZCcUqF_fiSjncLlrCz8QWA/exec';
+
+            fetch(scriptURL, {
+                method: 'POST',
+                body: new URLSearchParams({ 'email': email }),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === "success") {
+                        document.getElementById('message').style.display = 'block';
+                        document.getElementById('error-message').style.display = 'none';
+                        document.getElementById('subscription-form').reset();
+                    } else {
+                        document.getElementById('message').style.display = 'none';
+                        document.getElementById('error-message').style.display = 'block';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error!', error);
+                    document.getElementById('message').style.display = 'none';
+                    document.getElementById('error-message').style.display = 'block';
+                });
+        });
+    </script>
+
+</body>
+</html>
