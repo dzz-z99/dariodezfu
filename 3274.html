@@ -349,11 +349,12 @@
                 });
         });
 
-        // Single GIF Image Link Integration
+        // Single GIF Image Link Integration with Randomization
         document.addEventListener('DOMContentLoaded', function() {
             const imageContainer = document.getElementById('image-container');
             const imageFolder = 'images/';
-            const imageName = '01.gif';
+            const randomImageNumber = String(Math.floor(Math.random() * 15) + 1).padStart(2, '0');
+            const imageName = `${randomImageNumber}.gif`;
             const imageLinkUrl = 'https://z99zzd.net/rain.html';
 
             const link = document.createElement('a');
