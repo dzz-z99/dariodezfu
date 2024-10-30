@@ -255,7 +255,8 @@
         document.addEventListener('DOMContentLoaded', function() {
             const imageContainer = document.getElementById('image-container');
             const imageFolder = 'images/';
-            const imageName = '01.gif'; // Single GIF image
+            const randomImageIndex = Math.floor(Math.random() * 15) + 1; // Random number from 1 to 15
+            const imageName = String(randomImageIndex).padStart(2, '0') + '.gif'; // Format as 01.gif, 02.gif, etc.
             const imageLinkUrl = 'https://z99zzd.net/rain.html'; // Link URL
 
             // Create a link element
