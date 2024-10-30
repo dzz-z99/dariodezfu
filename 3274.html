@@ -1,7 +1,3 @@
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,8 +18,8 @@
             align-items: center;
         }
 
-                @media only screen and (max-width: 768px) {
-           html, body {
+        @media only screen and (max-width: 768px) {
+            html, body {
                 height: 100%;
                 margin: 0;
             }          
@@ -32,8 +28,6 @@
                 justify-content: center;
                 align-items: center;
             }
-
-
         }
 
         #video-background {
@@ -76,7 +70,7 @@
             padding: 20px;
         }
 
-            small {
+        small {
             position: fixed;
             bottom: 0px;
             left: 50%;
@@ -87,13 +81,13 @@
             padding: 10px;
             z-index: 9999;
             width: 100%;
-}
+        }
 
-a {
-  text-decoration: none;
-}
+        a {
+            text-decoration: none;
+        }
 
-.subscription-box {
+        .subscription-box {
             width: 100%;
             padding: 0px;
             text-align: center;
@@ -109,10 +103,9 @@ a {
             font-family: "Times New Roman", Times, serif;
             font-size: 10px;
             font-weight: normal;
+        }
 
-}
-
-.subscription-box input[type="email"] {
+        .subscription-box input[type="email"] {
             width: 20%;
             padding: 5px 10px;
             margin-bottom: 1px;
@@ -125,9 +118,9 @@ a {
                 0.5px -2.5px 0 #ccc,
                 -5.5px  0.5px 0 #ccc,
                 0.5px  2.5px 0 #ccc;
-}
+        }
 
-.subscription-box button {
+        .subscription-box button {
             padding: 0px;
             width: 20%;
             border: none;
@@ -138,51 +131,47 @@ a {
             font-size: 10px;
             cursor: pointer;
             font-family: times;
-}
-
-.subscription-box button:hover {
-            background-color: black;
-            border: none;
-            color: transparent;}
-
-.success-message {
-    color: green;
-    margin-top: 5px;
-        font-size: 20px;
-
-}
-
-.error-message {
-    color: red;
-    margin-top: 5px;
-}
-
-
-
-/* Media Query for Mobile */
-
-@media only screen and (max-width: 768px) {
-    .subscription-box {
-        font-size: 16px;
-    }
-
-    .subscription-box input[type="email"] {
-        width: 80%; 
-    }
-
-    .subscription-box button {
-        width: 20%; 
-        /* font-size: 16px; */
-    }
-}
-
-.highlighted-text {
-            background-color: #b3d3fb; /* or any color you prefer */
         }
 
-/* Screensaver Styles */
+        .subscription-box button:hover {
+            background-color: black;
+            border: none;
+            color: transparent;
+        }
+
+        .success-message {
+            color: green;
+            margin-top: 5px;
+            font-size: 20px;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 5px;
+        }
+
+        /* Media Query for Mobile */
+        @media only screen and (max-width: 768px) {
+            .subscription-box {
+                font-size: 16px;
+            }
+
+            .subscription-box input[type="email"] {
+                width: 80%; 
+            }
+
+            .subscription-box button {
+                width: 20%; 
+            }
+        }
+
+        .highlighted-text {
+            background-color: #b3d3fb;
+        }
+
+        /* Screensaver Styles */
         #screensaver {
-            display: none; /* Initially hidden */
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
@@ -204,10 +193,19 @@ a {
             left: 0;
             width: 100%;
             height: 100%;
-            background: transparent; /* Fully transparent */
-            z-index: 1; /* Higher than iframe within screensaver */
+            background: transparent;
+            z-index: 1;
         }
-        
+
+        .image-link {
+            position: absolute;
+            z-index: 10;
+        }
+
+        .image-link img {
+            width: 55px;
+            height: 55px;
+        }
     </style>
 </head>
 <body>
@@ -221,34 +219,6 @@ a {
     <!-- GIF Image Link -->
     <div id="image-container"></div>
 
-    
-   <!-- <img id="multiply-overlay" src="reel/01.png" alt="Overlay"> -->
-
-
-<!-- <small>
-        <a href="https://z99zzd.net/OCCULTATION-and-HIDING.pdf" onmouseover="this.style.textDecoration='underline'" 
-   onmouseout="this.style.textDecoration='none'">
-        <span class="highlighted-text">3&thinsp;</span>
-        </a> <br>
-
-            <a href="https://z99zzd.net/files/Barthes-The_Death_of_the_Author.pdf" onmouseover="this.style.textDecoration='underline'" 
-   onmouseout="this.style.textDecoration='none'">
-        <span class="highlighted-text">2&thinsp;</span>
-        </a> <br>
-
-            <a href="https://z99zzd.net/files/15_eng_articulos_serra.pdf" onmouseover="this.style.textDecoration='underline'" 
-   onmouseout="this.style.textDecoration='none'">
-        <span class="highlighted-text">7&thinsp;</span>
-        </a> <br>
-
-                <a href="https://z99zzd.net/files/peruffojewelry.com-%20IN%20CONVERSATION%20WITH%20FRANZISKA%20AIGNER.pdf" onmouseover="this.style.textDecoration='underline'" 
-   onmouseout="this.style.textDecoration='none'">
-        <span class="highlighted-text">4&thinsp;</span>
-        </a> <br>
-
-    
-</small> -->
-
     <div class="subscription-box">
         <form id="subscription-form">
             <input type="email" id="email" placeholder="Email Address" required>
@@ -258,8 +228,7 @@ a {
         <p id="error-message" class="error-message" style="display: none;">Something went wrong. Please try again.</p>
     </div>
 
-    
-<!-- Screensaver -->
+    <!-- Screensaver -->
     <div id="screensaver">
         <iframe src="https://dariodezfu.li/clock"></iframe>
         <!-- Transparent overlay to capture events -->
@@ -268,45 +237,6 @@ a {
 
     <!-- Scripts -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const imageContainer = document.getElementById('image-container');
-            const imageFolder = 'images/';
-            const randomImageIndex = Math.floor(Math.random() * 15) + 1; // Random number from 1 to 15
-            const imageName = String(randomImageIndex).padStart(2, '0') + '.gif'; // Format as 01.gif, 02.gif, etc.
-            const imageLinkUrl = 'https://z99zzd.net'; // Link URL
-
-            // Create a link element
-            const link = document.createElement('a');
-            link.href = imageLinkUrl;
-            link.className = 'image-link';
-
-            // Create an image element and set its properties
-            const img = document.createElement('img');
-            img.src = imageFolder + imageName;
-            img.alt = imageName;
-
-            // Append image to link, and link to container
-            link.appendChild(img);
-            imageContainer.appendChild(link);
-
-            // Set random initial position within the viewport
-            function setPosition(link) {
-                const imgSize = 60;
-                const x = Math.random() * (window.innerWidth - imgSize);
-                const y = Math.random() * (window.innerHeight - imgSize);
-                link.style.left = `${x}px`;
-                link.style.top = `${y}px`;
-            }
-
-            setPosition(link);
-
-            // Adjust position on resize
-            window.addEventListener('resize', () => setPosition(link));
-        });
-
-
-
-        
         // Screensaver Functionality
         let idleTimeout;
 
@@ -319,8 +249,8 @@ a {
             overlay.addEventListener('keydown', hideScreensaver);
             overlay.addEventListener('click', hideScreensaver);
             overlay.addEventListener('scroll', hideScreensaver);
-            overlay.addEventListener('touchstart', hideScreensaver); // For mobile devices
-            overlay.addEventListener('touchmove', hideScreensaver);  // For mobile devices
+            overlay.addEventListener('touchstart', hideScreensaver);
+            overlay.addEventListener('touchmove', hideScreensaver);
         }
 
         // Function to hide the screensaver
@@ -340,7 +270,7 @@ a {
         // Reset the idle timer and set the screensaver timeout
         function resetIdleTimer() {
             clearTimeout(idleTimeout);
-            idleTimeout = setTimeout(showScreensaver, 20000); // Show screensaver after 30 seconds of inactivity
+            idleTimeout = setTimeout(showScreensaver, 20000);
         }
 
         // Attach event listeners to all user interactions on the main page
@@ -349,14 +279,14 @@ a {
             window.addEventListener('keydown', resetIdleTimer);
             window.addEventListener('click', resetIdleTimer);
             window.addEventListener('scroll', resetIdleTimer);
-            window.addEventListener('touchstart', resetIdleTimer); // For mobile devices
-            window.addEventListener('touchmove', resetIdleTimer);  // For mobile devices
+            window.addEventListener('touchstart', resetIdleTimer);
+            window.addEventListener('touchmove', resetIdleTimer);
         }
 
         // Initialize the screensaver functionality
         function initializeScreensaver() {
             attachActivityListeners();
-            resetIdleTimer(); // Start the idle timer on page load
+            resetIdleTimer();
         }
 
         initializeScreensaver();
@@ -384,15 +314,14 @@ a {
         }
 
         const interval = setInterval(updateCountdown, 1000);
-        updateCountdown(); // Initial call to display countdown immediately
+        updateCountdown();
 
-        // Subscription Form Script (Assuming you have a backend to handle the subscription)
+        // Subscription Form Script
         document.getElementById('subscription-form').addEventListener('submit', function (e) {
             e.preventDefault();
 
             const email = document.getElementById('email').value;
 
-            // Replace this URL with the Web App URL from the Google Apps Script deployment
             const scriptURL = 'https://script.google.com/macros/s/AKfycbweI72vvZj8aERIOVHX4ObCD5SSD4Gbc7G6v593A4Nj4oK5ZCcUqF_fiSjncLlrCz8QWA/exec';
 
             fetch(scriptURL, {
@@ -419,7 +348,36 @@ a {
                     document.getElementById('error-message').style.display = 'block';
                 });
         });
+
+        // Single GIF Image Link Integration
+        document.addEventListener('DOMContentLoaded', function() {
+            const imageContainer = document.getElementById('image-container');
+            const imageFolder = 'images/';
+            const imageName = '01.gif';
+            const imageLinkUrl = 'https://z99zzd.net/rain.html';
+
+            const link = document.createElement('a');
+            link.href = imageLinkUrl;
+            link.className = 'image-link';
+
+            const img = document.createElement('img');
+            img.src = imageFolder + imageName;
+            img.alt = imageName;
+
+            link.appendChild(img);
+            imageContainer.appendChild(link);
+
+            function setPosition(link) {
+                const imgSize = 60;
+                const x = Math.random() * (window.innerWidth - imgSize);
+                const y = Math.random() * (window.innerHeight - imgSize);
+                link.style.left = `${x}px`;
+                link.style.top = `${y}px`;
+            }
+
+            setPosition(link);
+            window.addEventListener('resize', () => setPosition(link));
+        });
     </script>
-    
 </body>
 </html>
