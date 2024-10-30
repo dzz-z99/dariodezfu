@@ -54,7 +54,9 @@
             text-align: center;
             position: relative;
             z-index: 2;
-            background-color: rgba(0, 0, 0, 0.3);
+            background-color: rgba(0, 0, 0, 0);
+            color: #ccc;
+            border: 0.5px solid #ccc;
         }
 
         #multiply-overlay {
@@ -75,16 +77,16 @@
         }
 
             small {
-    position: fixed;
-    bottom: 0px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 16px;
-    font-weight: normal;
-    text-align: center;
-    padding: 10px; /* Optional: Padding around the text */
-    z-index: 9999; /* Ensure it stays above other elements */
-    width: 100%; /* Adjust width as needed */
+            position: fixed;
+            bottom: 0px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 16px;
+            font-weight: normal;
+            text-align: center;
+            padding: 10px;
+            z-index: 9999;
+            width: 100%;
 }
 
 a {
@@ -92,50 +94,56 @@ a {
 }
 
 .subscription-box {
-    width: 100%;
-    padding: 0px;
-    text-align: center;
-    border: 0.5px solid transparent;
-    border-radius: 0px;
-    background-color: rgba(0, 0, 0, 0); /* Makes it semi-transparent */
-    position: fixed;  /* Ensures it floats */
-    top: 5px;     /* Position it 10px from the bottom */
-    margin-right: 5px;      /* Position it 10px from the right */
-    margin-left: 5px;      /* Position it 10px from the right */
-    z-index: 1000;    /* Ensures it stays on top of other elements */
-    color: black;     /* Text color for better readability */
-    font-family: "Times New Roman", Times, serif;
-    font-size: 10px;
-    font-weight: normal;
+            width: 100%;
+            padding: 0px;
+            text-align: center;
+            border: 0.5px solid transparent;
+            border-radius: 0px;
+            background-color: rgba(0, 0, 0, 0);
+            position: fixed;
+            top: 5px;
+            margin-right: 5px;
+            margin-left: 5px;
+            z-index: 1000;
+            color: black;
+            font-family: "Times New Roman", Times, serif;
+            font-size: 10px;
+            font-weight: normal;
 
 }
 
 .subscription-box input[type="email"] {
-    width: 20%;
-    padding: 5px 10px;
-    margin-bottom: 1px;
-    border-radius: 0px;
-    font-size: 10px;
-    border: 1px solid #ccc;
-    font-family: "Times New Roman", Times, serif;
+            width: 20%;
+            padding: 5px 10px;
+            margin-bottom: 1px;
+            border-radius: 0px;
+            font-size: 10px;
+            border: 1px solid #ccc;
+            font-family: "Times New Roman", Times, serif;
+            box-shadow: 
+                -5.5px -2.5px 0 #ccc,
+                0.5px -2.5px 0 #ccc,
+                -5.5px  0.5px 0 #ccc,
+                0.5px  2.5px 0 #ccc;
 }
 
 .subscription-box button {
-    padding: 0px;
-        width: 20%;
-    border: none;
-    background-color: white; /* #b3d3fb */
-    color: #757575; /* #551A8B */
-    border-radius: 0px;
-    border: 1px solid #ccc;
-    font-size: 10px;
-    cursor: pointer;
-    font-family: times;
+            padding: 0px;
+            width: 20%;
+            border: none;
+            background-color: white;
+            color: #757575;
+            border-radius: 0px;
+            border: 1px solid #ccc;
+            font-size: 10px;
+            cursor: pointer;
+            font-family: times;
 }
 
 .subscription-box button:hover {
-    background-color: yellow; /* #b3d3fb */
-}
+            background-color: black;
+            border: none;
+            color: transparent;}
 
 .success-message {
     color: green;
