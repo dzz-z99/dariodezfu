@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>undefined</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            position: relative;
+            font-size: 2em;
+            font-weight: bold;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @media only screen and (max-width: 768px) {
+            html, body {
+                height: 100%;
+                margin: 0;
+            }          
+            body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+
+        #video-background {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 34%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        #left-content {
+            width: 80%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            background-color: rgba(0, 0, 0, 0);
+            color: #ccc;
+            border: 0.5px solid #ccc;
+        }
+
+        #multiply-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
+            pointer-events: none;
+            mix-blend-mode: multiply;
+            object-fit: fill;
+        }
+
+        #countdown {
+            z-index: 4;
+            padding: 20px;
+        }
+
+        small {
+            position: fixed;
+            bottom: 0px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 16px;
+            font-weight: normal;
+            text-align: center;
+            padding: 10px;
+            z-index: 9999;
+            width: 100%;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .highlighted-text {
+            background-color: #b3d3fb;
+        }
+
+        /* Screensaver Styles */
+        #screensaver {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 99999;
+        }
+
+        #screensaver iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Overlay to capture events */
+        #screensaver-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            z-index: 1;
+        }
+
+        .image-link {
+            position: absolute;
+            z-index: 10;
+        }
+
+        .image-link img {
+            width: 55px;
+            height: 55px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="left-content">
+        <div id="countdown">
+            <!-- Countdown timer will be inserted here by JavaScript -->
+        </div>
+    </div>
+
+    <!-- GIF Image Link -->
+    <div id="image-container"></div>
+
+    <!-- Screensaver -->
+    <div id="screensaver">
+        <iframe src="https://dariodezfu.li/clock"></iframe>
+        <!-- Transparent overlay to capture events -->
+        <div id="screensaver-overlay"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Screensaver Functionality
+        let idleTimeout;
+
+        // Function to show the screensaver
+        function showScreensaver() {
+            document.getElementById('screensaver').style.display = 'block';
+            // Start listening to events on the overlay
+            const overlay = document.getElementById('screensaver-overlay');
+            overlay.addEventListener('mousemove', hideScreensaver);
+            overlay.addEventListener('keydown', hideScreensaver);
+            overlay.addEventListener('click', hideScreensaver);
+            overlay.addEventListener('scroll', hideScreensaver);
+            overlay.addEventListener('touchstart', hideScreensaver);
+            overlay.addEventListener('touchmove', hideScreensaver);
+        }
+
+        // Function to hide the screensaver
+        function hideScreensaver() {
+            document.getElementById('screensaver').style.display = 'none';
+            resetIdleTimer();
+            // Remove event listeners from the overlay to prevent memory leaks
+            const overlay = document.getElementById('screensaver-overlay');
+            overlay.removeEventListener('mousemove', hideScreensaver);
+            overlay.removeEventListener('keydown', hideScreensaver);
+            overlay.removeEventListener('click', hideScreensaver);
+            overlay.removeEventListener('scroll', hideScreensaver);
+            overlay.removeEventListener('touchstart', hideScreensaver);
+            overlay.removeEventListener('touchmove', hideScreensaver);
+        }
+
+        // Reset the idle timer and set the screensaver timeout
+        function resetIdleTimer() {
+            clearTimeout(idleTimeout);
+            idleTimeout = setTimeout(showScreensaver, 20000);
+        }
+
+        // Attach event listeners to all user interactions on the main page
+        function attachActivityListeners() {
+            window.addEventListener('mousemove', resetIdleTimer);
+            window.addEventListener('keydown', resetIdleTimer);
+            window.addEventListener('click', resetIdleTimer);
+            window.addEventListener('scroll', resetIdleTimer);
+            window.addEventListener('touchstart', resetIdleTimer);
+            window.addEventListener('touchmove', resetIdleTimer);
+        }
+
+        // Initialize the screensaver functionality
+        function initializeScreensaver() {
+            attachActivityListeners();
+            resetIdleTimer();
+        }
+
+        initializeScreensaver();
+
+        // Countdown Timer Script
+        function updateCountdown() {
+            const targetDate = new Date("2031-02-03T00:00:00").getTime();
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            const years = Math.floor(distance / (1000 * 60 * 60 * 24 * 365));
+            const months = Math.floor((distance % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24 * 30));
+            const days = Math.floor((distance % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / 1000);
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown").innerHTML =
+                `${years} years, ${months} months, ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+
+            if (distance < 0) {
+                clearInterval(interval);
+                document.getElementById("countdown").innerHTML = "The date has passed";
+            }
+        }
+
+        const interval = setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Single GIF Image Link Integration with Randomization
+        document.addEventListener('DOMContentLoaded', function() {
+            const imageContainer = document.getElementById('image-container');
+            const imageFolder = 'images/';
+            const randomImageNumber = String(Math.floor(Math.random() * 15) + 1).padStart(2, '0');
+            const imageName = `${randomImageNumber}.gif`;
+            const imageLinkUrl = 'https://z99zzd.net';
+
+            const link = document.createElement('a');
+            link.href = imageLinkUrl;
+            link.className = 'image-link';
+
+            const img = document.createElement('img');
+            img.src = imageFolder + imageName;
+            img.alt = imageName;
+
+            link.appendChild(img);
+            imageContainer.appendChild(link);
+
+            function setPosition(link) {
+                const imgSize = 60;
+                const x = Math.random() * (window.innerWidth - imgSize);
+                const y = Math.random() * (window.innerHeight - imgSize);
+                link.style.left = `${x}px`;
+                link.style.top = `${y}px`;
+            }
+
+            setPosition(link);
+            window.addEventListener('resize', () => setPosition(link));
+        });
+    </script>
+</body>
+</html>
