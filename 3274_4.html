@@ -230,9 +230,8 @@
         updateCountdown();
 
         // Single GIF Image Link Integration with Randomization
-        function randomizeGif() {
+        document.addEventListener('DOMContentLoaded', function() {
             const imageContainer = document.getElementById('image-container');
-            imageContainer.innerHTML = '';
             const imageFolder = 'images/';
             const randomImageNumber = String(Math.floor(Math.random() * 15) + 1).padStart(2, '0');
             const imageName = `${randomImageNumber}.gif`;
@@ -258,13 +257,8 @@
             }
 
             setPosition(link);
-            window.addEventListener('resize', () => {
-                randomizeGif();
-                setPosition(link);
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', randomizeGif);
+            window.addEventListener('resize', () => setPosition(link));
+        });
     </script>
 </body>
 </html>
