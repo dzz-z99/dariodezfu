@@ -1,65 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>undefined</title>
-    <style>
-        /* General reset for body */
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: black; /* Fallback color in case the image doesn't load */
-        }
+    <head> <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>undefined</title>
+        <style> /* General reset for body */ body, html { margin: 0; padding: 0; height: 100%; width: 100%; display: flex; justify-content: center; align-items: center; background-color: black; /* Fallback color in case the image doesn't load */ } /* Full background image */
+            .background-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; /* Ensures the image covers the container without stretching */
+                               z-index: -1; /* Ensures the image stays behind all other content */ } /* Ensure the link covers the whole page */
+            .full-page-link { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; display: block; }
+        </style>
+    </head>
+    <body>
 
-        /* Full background image */
-        .background-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Ensures the image covers the container without stretching */
-            z-index: -1; /* Ensures the image stays behind all other content */
-        }
-
-        /* Ensure the link covers the whole page */
-        .full-page-link {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 10;
-            display: block;
-        }
-
-        /* Transparent image displayed above everything */
-        .foreground-image {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 20;
-            pointer-events: none;
-        }
-
-    </style>
-</head>
-<body>
-
-   <a href="https://dariodezfu.li/3274" class="full-page-link">
-       <img src="IMG_3641.JPG" alt="Background" class="background-image">
-   </a>
-
-   <img src="https://dariodezfu.li/images/3274.png" alt="" class="foreground-image">
-
-</body>
+        <a href="https://dariodezfu.li/3274" class="full-page-link"> <img src="IMG_3641.JPG" alt="Background" class="background-image"> </a>
+    </body>
 </html>
