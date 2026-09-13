@@ -128,6 +128,18 @@
             width: 55px;
             height: 55px;
         }
+
+        /* Transparent PNG above everything */
+        #foreground-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: fill;
+            z-index: 100000;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
@@ -147,6 +159,13 @@
         <!-- Transparent overlay to capture events -->
         <div id="screensaver-overlay"></div>
     </div>
+
+    <!-- Transparent foreground image -->
+    <img
+        id="foreground-image"
+        src="https://dariodezfu.li/images/3274.png"
+        alt=""
+    >
 
     <!-- Scripts -->
     <script>
@@ -260,7 +279,7 @@
             window.addEventListener('resize', () => setPosition(link));
         });
 
-// Subscription Form Script (Assuming you have a backend to handle the subscription)
+        // Subscription Form Script (Assuming you have a backend to handle the subscription)
         document.getElementById('subscription-form').addEventListener('submit', function (e) {
             e.preventDefault();
 
@@ -293,8 +312,6 @@
                     document.getElementById('error-message').style.display = 'block';
                 });
         });
-
-        
     </script>
 </body>
 </html>
